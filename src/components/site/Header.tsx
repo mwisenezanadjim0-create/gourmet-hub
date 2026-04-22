@@ -2,11 +2,11 @@ import { Link } from "@tanstack/react-router";
 import { ShoppingBag } from "lucide-react";
 import { useCart } from "@/lib/cart";
 
-const navLinks = [
+const navLinks: { to: "/" | "/menu" | "/about"; label: string; exact?: boolean }[] = [
   { to: "/", label: "Home", exact: true },
   { to: "/menu", label: "Menu" },
   { to: "/about", label: "Our Story" },
-] as const;
+];
 
 export function Header() {
   const { count } = useCart();

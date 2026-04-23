@@ -184,15 +184,24 @@ function HomePage() {
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
-        {/* ─── Blurred Atmospheric Background ─── */}
+        {/* ─── Dynamic Blurred Background (Synced with Slider) ─── */}
         <div className="absolute inset-0 z-0">
-          <img
-            src="/hero-cinematic.png"
-            alt=""
-            className="h-full w-full object-cover blur-[60px] scale-110 opacity-40 brightness-110"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-linear-to-b from-[#f4ece4]/20 via-transparent to-[#f4ece4]/40" />
+          {heroSlides.map((slide, i) => (
+            <div
+              key={i}
+              className={`absolute inset-0 h-full w-full transition-all duration-1500 ease-in-out ${
+                activeSlide === i ? "opacity-40 z-10 scale-100" : "opacity-0 z-0 scale-110"
+              }`}
+            >
+              <img
+                src={slide.src}
+                alt=""
+                className="h-full w-full object-cover blur-2xl brightness-110"
+                loading="lazy"
+              />
+            </div>
+          ))}
+          <div className="absolute inset-0 bg-linear-to-b from-[#f4ece4]/30 via-transparent to-[#f4ece4]/50" />
         </div>
 
         {/* ─── Main content grid ─── */}

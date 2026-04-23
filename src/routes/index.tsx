@@ -200,6 +200,8 @@ function HomePage() {
                 alt={slide.alt}
                 width={1600}
                 height={1600}
+                loading="eager"
+                fetchPriority="high"
                 className="h-full w-full object-cover"
               />
               <div className="absolute inset-0 bg-black/40 pointer-events-none" />
@@ -244,7 +246,7 @@ function HomePage() {
         </div>
 
         {/* ─── Main content grid ─── */}
-        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col gap-10 px-0 pb-24 pt-24 md:grid md:grid-cols-[0.7fr_1.3fr] md:gap-12 md:px-6">
+        <div className="relative z-10 mx-auto flex w-full max-w-[1600px] flex-col gap-10 px-0 pb-24 pt-24 md:grid md:grid-cols-[0.6fr_1.4fr] md:gap-16 md:px-12">
 
           {/* Text content */}
           <div className="relative z-30 mx-6 flex flex-col justify-center rounded-[2.5rem] border border-white/10 bg-[#1a0f0a]/40 p-8 shadow-2xl backdrop-blur-xl md:mx-0 md:rounded-none md:border-none md:bg-transparent md:p-0 md:shadow-none md:backdrop-blur-none">
@@ -310,6 +312,8 @@ function HomePage() {
                     alt={slide.alt}
                     width={1600}
                     height={1600}
+                    loading="eager"
+                    fetchPriority="high"
                     className="h-full w-full object-cover"
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-black/10 pointer-events-none" />

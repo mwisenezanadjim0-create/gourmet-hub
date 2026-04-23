@@ -360,17 +360,17 @@ function HomePage() {
 
             {/* Auto-sliding floating card */}
             <div
-              className={`absolute -left-12 bottom-20 -rotate-3 overflow-hidden rounded-3xl border border-gold/20 bg-card/95 shadow-[0_20px_50px_rgba(0,0,0,0.15)] backdrop-blur-3xl transition-all duration-800 ease-[cubic-bezier(0.23,1,0.32,1)] min-w-[320px] ${
+              className={`absolute -left-16 bottom-24 z-40 -rotate-3 overflow-hidden rounded-[2rem] border border-gold/25 bg-card/95 shadow-[0_30px_70px_rgba(0,0,0,0.2)] backdrop-blur-3xl transition-all duration-800 ease-[cubic-bezier(0.23,1,0.32,1)] min-w-[420px] ${
                 cardVisible
                   ? "-rotate-3 translate-y-0 scale-100 opacity-100"
-                  : "rotate-0 translate-y-7.5 scale-90 opacity-0"
+                  : "rotate-0 translate-y-10 scale-90 opacity-0"
               }`}
             >
-              <div className="px-7 py-5">
+              <div className="px-10 py-8">
                 <div className="overflow-hidden">
                   <p
-                    className={`font-script text-xl text-gold leading-tight transition-all duration-500 ${
-                      cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3.75"
+                    className={`font-script text-2xl text-gold leading-snug transition-all duration-500 ${
+                      cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                     }`}
                   >
                     &ldquo;{heroSlides[activeSlide].caption}&rdquo;
@@ -378,8 +378,8 @@ function HomePage() {
                 </div>
                 <div className="overflow-hidden">
                   <p
-                    className={`mt-1.5 text-[9px] uppercase tracking-[0.2em] text-muted-foreground/80 font-medium transition-all duration-500 delay-100 ${
-                      cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2.5"
+                    className={`mt-3 text-[10px] uppercase tracking-[0.25em] text-muted-foreground/80 font-semibold transition-all duration-500 delay-100 ${
+                      cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
                     }`}
                   >
                     — {heroSlides[activeSlide].label}

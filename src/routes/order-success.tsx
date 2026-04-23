@@ -4,10 +4,7 @@ import { z } from "zod";
 import { CheckCircle2 } from "lucide-react";
 
 export const Route = createFileRoute("/order-success")({
-  validateSearch: (search) =>
-    z
-      .object({ order: z.string().optional() })
-      .parse(search),
+  validateSearch: (search) => z.object({ order: z.string().optional() }).parse(search),
   head: () => ({
     meta: [
       { title: "Order Confirmed — Aslan Cafe Luxe & Resto" },
@@ -29,8 +26,8 @@ function OrderSuccessPage() {
         <span className="mt-8 block font-script text-3xl text-terracotta">grazie</span>
         <h1 className="mt-2 font-display text-5xl">Your order is in</h1>
         <p className="mx-auto mt-6 max-w-md text-muted-foreground">
-          Our kitchen has it. We'll send a call if we have any questions.
-          Expect delivery within 45–60 minutes.
+          Our kitchen has it. We'll send a call if we have any questions. Expect delivery within
+          45–60 minutes.
         </p>
 
         {order && (

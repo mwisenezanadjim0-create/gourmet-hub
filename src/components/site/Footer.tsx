@@ -6,15 +6,21 @@ export function Footer() {
     <footer className="mt-24 border-t border-border/60 bg-[color-mix(in_oklab,var(--olive)_18%,var(--background))]">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-4">
         <div>
-            <div className="mb-4 flex items-center gap-3">
-              <div className="h-12 w-12 overflow-hidden rounded-full border border-gold/30">
-                <img src="/aslanlogo.png" alt="Aslan Cafe Logo" className="h-full w-full object-cover" />
-              </div>
-              <div className="flex flex-col">
-                <span className="block font-script text-2xl text-gold">Aslan Cafe</span>
-                <span className="block font-display text-xs tracking-[0.3em] uppercase text-foreground/70">LUXE &amp; RESTO</span>
-              </div>
+          <div className="mb-4 flex items-center gap-3">
+            <div className="h-12 w-12 overflow-hidden rounded-full border border-gold/30">
+              <img
+                src="/aslanlogo.png"
+                alt="Aslan Cafe Logo"
+                className="h-full w-full object-cover"
+              />
             </div>
+            <div className="flex flex-col">
+              <span className="block font-script text-2xl text-gold">Aslan Cafe</span>
+              <span className="block font-display text-xs tracking-[0.3em] uppercase text-foreground/70">
+                LUXE &amp; RESTO
+              </span>
+            </div>
+          </div>
           <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
             Exquisite flavors, premium dining, and a touch of luxury in every dish.
           </p>
@@ -41,11 +47,19 @@ export function Footer() {
           <ul className="space-y-3 text-sm">
             <li className="flex items-start gap-2">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-terracotta" />
-              <span>142 Cedar Lane<br />Brooklyn, NY 11211</span>
+              <span>
+                142 Cedar Lane
+                <br />
+                Brooklyn, NY 11211
+              </span>
             </li>
             <li className="flex items-start gap-2">
               <Clock className="mt-0.5 h-4 w-4 shrink-0 text-terracotta" />
-              <span>Tue–Sun · 5pm – 11pm<br />Closed Mondays</span>
+              <span>
+                Tue–Sun · 5pm – 11pm
+                <br />
+                Closed Mondays
+              </span>
             </li>
           </ul>
         </div>
@@ -55,14 +69,19 @@ export function Footer() {
           <ul className="space-y-3 text-sm">
             <li className="flex items-start gap-2">
               <Phone className="mt-0.5 h-4 w-4 shrink-0 text-terracotta" />
-              <a href="tel:+17185550142" className="hover:text-terracotta">(718) 555-0142</a>
+              <a href="tel:+17185550142" className="hover:text-terracotta">
+                (718) 555-0142
+              </a>
             </li>
             <li className="flex items-start gap-2">
               <Mail className="mt-0.5 h-4 w-4 shrink-0 text-terracotta" />
-              <a href="mailto:hello@aslancafeluxe.com" className="hover:text-terracotta">hello@aslancafeluxe.com</a>
+              <a href="mailto:hello@aslancafeluxe.com" className="hover:text-terracotta">
+                hello@aslancafeluxe.com
+              </a>
             </li>
             <li className="text-muted-foreground">
-              Owner & Chef<br />
+              Owner & Chef
+              <br />
               <span className="text-foreground">Mira Kavalis</span>
             </li>
           </ul>
@@ -71,10 +90,26 @@ export function Footer() {
         <div>
           <h3 className="mb-4 text-xs uppercase tracking-[0.25em] text-muted-foreground">Explore</h3>
           <ul className="space-y-2 text-sm">
-            <li><Link to="/menu" className="hover:text-terracotta">Menu</Link></li>
-            <li><Link to="/about" className="hover:text-terracotta">Our Story</Link></li>
-            <li><Link to="/cart" className="hover:text-terracotta">Order Online</Link></li>
-            <li><Link to="/staff/login" className="hover:text-terracotta">Staff Login</Link></li>
+            <li>
+              <Link to="/menu" className="hover:text-terracotta">
+                Menu
+              </Link>
+            </li>
+            <li>
+              <Link to="/about" className="hover:text-terracotta">
+                Our Story
+              </Link>
+            </li>
+            <li>
+              <Link to="/cart" className="hover:text-terracotta">
+                Order Online
+              </Link>
+            </li>
+            <li>
+              <Link to="/staff/login" className="hover:text-terracotta">
+                Staff Login
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

@@ -16,18 +16,20 @@ export function Header() {
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
         <Link to="/" className="group flex items-center gap-3 leading-none">
           <div className="relative h-12 w-12 overflow-hidden rounded-full border-2 border-gold shadow-lg transition-transform group-hover:scale-110">
-            <img 
-              src="/aslanlogo.png" 
-              alt="Aslan Cafe Logo" 
+            <img
+              src="/aslanlogo.png"
+              alt="Aslan Cafe Logo"
               className="h-full w-full object-cover"
               onError={(e) => {
-                e.currentTarget.style.display = 'none';
+                e.currentTarget.style.display = "none";
               }}
             />
           </div>
           <div className="flex flex-col">
             <span className="font-script text-2xl text-gold">Aslan Cafe</span>
-            <span className="-mt-1 font-display text-xs tracking-[0.4em] text-foreground/70 uppercase">Luxe &amp; Resto</span>
+            <span className="-mt-1 font-display text-xs tracking-[0.4em] text-foreground/70 uppercase">
+              Luxe &amp; Resto
+            </span>
           </div>
         </Link>
 

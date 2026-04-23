@@ -56,7 +56,9 @@ function StaffLoginPage() {
           className="mt-10 w-full space-y-5 rounded-[2rem] border border-border/60 bg-card/80 p-8 shadow-lg backdrop-blur"
         >
           <label className="block">
-            <span className="mb-1.5 block text-xs uppercase tracking-[0.2em] text-muted-foreground">Email</span>
+            <span className="mb-1.5 block text-xs uppercase tracking-[0.2em] text-muted-foreground">
+              Email
+            </span>
             <input
               required
               type="email"
@@ -66,7 +68,9 @@ function StaffLoginPage() {
             />
           </label>
           <label className="block">
-            <span className="mb-1.5 block text-xs uppercase tracking-[0.2em] text-muted-foreground">Password</span>
+            <span className="mb-1.5 block text-xs uppercase tracking-[0.2em] text-muted-foreground">
+              Password
+            </span>
             <input
               required
               type="password"
@@ -94,7 +98,10 @@ function StaffLoginPage() {
           </button>
         </form>
 
-        <Link to="/" className="mt-6 text-xs uppercase tracking-[0.2em] text-muted-foreground hover:text-terracotta">
+        <Link
+          to="/"
+          className="mt-6 text-xs uppercase tracking-[0.2em] text-muted-foreground hover:text-terracotta"
+        >
           ← Back to site
         </Link>
       </section>

@@ -63,7 +63,10 @@ function StaffDashboard() {
     (async () => {
       const { data: userData } = await supabase.auth.getUser();
       if (!userData.user) return;
-      const { data: roles } = await supabase.from("user_roles").select("role").eq("user_id", userData.user.id);
+      const { data: roles } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", userData.user.id);
       const hasStaff = (roles ?? []).some((r) => r.role === "staff" || r.role === "admin");
       setIsStaff(hasStaff);
     })();
@@ -119,13 +122,20 @@ function StaffDashboard() {
       <div className="mx-auto max-w-md px-6 py-20 text-center">
         <h1 className="font-display text-3xl">Access pending</h1>
         <p className="mt-4 text-muted-foreground">
-          Your account doesn't have staff access yet. Ask an admin to grant you the <code>staff</code> role.
+          Your account doesn't have staff access yet. Ask an admin to grant you the{" "}
+          <code>staff</code> role.
         </p>
         <div className="mt-8 flex justify-center gap-3">
-          <button onClick={signOut} className="rounded-full border border-border px-5 py-2 text-sm hover:border-terracotta">
+          <button
+            onClick={signOut}
+            className="rounded-full border border-border px-5 py-2 text-sm hover:border-terracotta"
+          >
             Sign out
           </button>
-          <Link to="/" className="rounded-full bg-terracotta px-5 py-2 text-sm text-primary-foreground hover:bg-ember">
+          <Link
+            to="/"
+            className="rounded-full bg-terracotta px-5 py-2 text-sm text-primary-foreground hover:bg-ember"
+          >
             Home
           </Link>
         </div>
@@ -167,7 +177,9 @@ function StaffDashboard() {
               key={f}
               onClick={() => setFilter(f)}
               className={`rounded-full px-4 py-1.5 text-xs uppercase tracking-[0.2em] transition-colors ${
-                filter === f ? "bg-terracotta text-primary-foreground" : "border border-border hover:border-terracotta"
+                filter === f
+                  ? "bg-terracotta text-primary-foreground"
+                  : "border border-border hover:border-terracotta"
               }`}
             >
               {f} {f !== "all" && `(${orders.filter((o) => o.status === f).length})`}
@@ -189,7 +201,13 @@ function StaffDashboard() {
   );
 }
 
-function OrderCard({ order, onUpdate }: { order: Order; onUpdate: (id: string, s: Status) => void }) {
+function OrderCard({
+  order,
+  onUpdate,
+}: {
+  order: Order;
+  onUpdate: (id: string, s: Status) => void;
+}) {
   const items = (order.items as Array<{ name: string; quantity: number; price: number }>) ?? [];
 
   return (
@@ -201,22 +219,36 @@ function OrderCard({ order, onUpdate }: { order: Order; onUpdate: (id: string, s
             {formatDistanceToNow(new Date(order.created_at), { addSuffix: true })}
           </p>
         </div>
-        <span className={`rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.2em] ${statusStyles[order.status]}`}>
+        <span
+          className={`rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.2em] ${statusStyles[order.status]}`}
+        >
           {order.status}
         </span>
       </div>
 
       <div className="mt-4 space-y-1 text-sm">
-        <p><span className="text-muted-foreground">Customer:</span> {order.customer_name}</p>
-        <p><span className="text-muted-foreground">Phone:</span> {order.customer_phone}</p>
-        <p><span className="text-muted-foreground">Address:</span> {order.address}</p>
-        {order.notes && <p><span className="text-muted-foreground">Notes:</span> {order.notes}</p>}
+        <p>
+          <span className="text-muted-foreground">Customer:</span> {order.customer_name}
+        </p>
+        <p>
+          <span className="text-muted-foreground">Phone:</span> {order.customer_phone}
+        </p>
+        <p>
+          <span className="text-muted-foreground">Address:</span> {order.address}
+        </p>
+        {order.notes && (
+          <p>
+            <span className="text-muted-foreground">Notes:</span> {order.notes}
+          </p>
+        )}
       </div>
 
       <ul className="mt-4 space-y-1 border-t border-border/60 pt-3 text-sm">
         {items.map((i, idx) => (
           <li key={idx} className="flex justify-between">
-            <span>{i.quantity}× {i.name}</span>
+            <span>
+              {i.quantity}× {i.name}
+            </span>
             <span className="text-muted-foreground">{formatPrice(i.price * i.quantity)}</span>
           </li>
         ))}

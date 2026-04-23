@@ -11,9 +11,15 @@ export const Route = createFileRoute("/menu")({
   head: () => ({
     meta: [
       { title: "Menu — Aslan Cafe Luxe & Resto" },
-      { name: "description", content: "Explore our gourmet menu featuring luxury dishes and exquisite flavors." },
+      {
+        name: "description",
+        content: "Explore our gourmet menu featuring luxury dishes and exquisite flavors.",
+      },
       { property: "og:title", content: "Menu — Aslan Cafe Luxe & Resto" },
-      { property: "og:description", content: "Gourmet flavors and luxury dishes from our kitchen in Kigali." },
+      {
+        property: "og:description",
+        content: "Gourmet flavors and luxury dishes from our kitchen in Kigali.",
+      },
     ],
   }),
   component: MenuPage,
@@ -48,7 +54,8 @@ function MenuPage() {
         <span className="font-script text-3xl text-terracotta">the menu</span>
         <h1 className="mt-2 font-display text-5xl md:text-6xl">A seasonal table</h1>
         <p className="mx-auto mt-5 max-w-xl text-muted-foreground">
-          We change things often. Seasonality leads; the rest follows. Everything is made in-house, from the bread to the pasta.
+          We change things often. Seasonality leads; the rest follows. Everything is made in-house,
+          from the bread to the pasta.
         </p>
         <div className="divider-organic mx-auto mt-8" />
       </section>
@@ -89,12 +96,21 @@ function MenuPage() {
                     <div className="flex min-w-0 flex-1 flex-col">
                       <div className="flex items-baseline justify-between gap-3">
                         <h3 className="font-display text-xl leading-tight">{item.name}</h3>
-                        <span className="font-display text-lg text-terracotta">{formatPrice(Number(item.price))}</span>
+                        <span className="font-display text-lg text-terracotta">
+                          {formatPrice(Number(item.price))}
+                        </span>
                       </div>
-                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                        {item.description}
+                      </p>
                       <button
                         onClick={() => {
-                          add({ id: item.id, slug: item.slug, name: item.name, price: Number(item.price) });
+                          add({
+                            id: item.id,
+                            slug: item.slug,
+                            name: item.name,
+                            price: Number(item.price),
+                          });
                           toast.success(`Added ${item.name} to cart`);
                         }}
                         className="mt-4 inline-flex w-fit items-center gap-1.5 rounded-full bg-terracotta/10 px-4 py-1.5 text-xs uppercase tracking-[0.2em] text-terracotta transition-colors hover:bg-terracotta hover:text-primary-foreground"

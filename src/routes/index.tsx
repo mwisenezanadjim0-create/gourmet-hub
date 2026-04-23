@@ -209,12 +209,12 @@ function HomePage() {
 
           {/* Text content */}
           <div className="relative z-30 mx-6 flex flex-col justify-center rounded-[2.5rem] border border-white/10 bg-[#1a0f0a]/40 p-8 shadow-2xl backdrop-blur-xl md:mx-0 md:rounded-none md:border-none md:bg-transparent md:p-0 md:shadow-none md:backdrop-blur-none">
-            <span className="mb-6 inline-flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.4em] text-gold/80 md:text-sm md:text-olive">
-              <span className="h-px w-8 bg-gold/40 md:w-10 md:bg-olive/60" /> Kigali · est. 2024
+            <span className="mb-6 inline-flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.4em] text-gold/80 md:text-sm md:text-gold">
+              <span className="h-px w-8 bg-gold/40 md:w-10 md:bg-gold/60" /> Kigali · est. 2024
             </span>
             <div className="overflow-hidden">
               <h1
-                className={`font-display text-3xl leading-[1.1] text-white transition-all duration-800 ease-out md:text-6xl md:leading-[1.05] md:text-foreground ${
+                className={`font-display text-3xl leading-[1.1] text-white transition-all duration-800 ease-out md:text-6xl md:leading-[1.05] ${
                   cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7.5"
                 }`}
               >
@@ -226,7 +226,7 @@ function HomePage() {
             </div>
             <div className="overflow-hidden">
               <p
-                className={`mt-6 max-w-md text-sm font-medium leading-relaxed tracking-wide text-white/90 transition-all delay-150 duration-800 ease-out md:mt-8 md:text-xl md:text-muted-foreground/90 ${
+                className={`mt-6 max-w-md text-sm font-medium leading-relaxed tracking-wide text-white/90 transition-all delay-150 duration-800 ease-out md:mt-8 md:text-xl md:text-white/80 ${
                   cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3.75"
                 }`}
               >

@@ -15,8 +15,8 @@ export function Header() {
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
         <Link to="/" className="group flex flex-col leading-none">
-          <span className="font-script text-2xl text-terracotta">Olea</span>
-          <span className="-mt-1 font-display text-xl tracking-[0.3em] text-foreground">&amp; EMBER</span>
+          <span className="font-script text-2xl text-terracotta">Aslan Cafe</span>
+          <span className="-mt-1 font-display text-xl tracking-[0.3em] text-foreground">LUXE &amp; RESTO</span>
         </Link>
 
         <nav className="hidden items-center gap-10 md:flex">

@@ -10,10 +10,10 @@ import market from "@/assets/about-market.jpg";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "Our Story — Olea & Ember" },
-      { name: "description", content: "The story behind Olea & Ember: one fire, handmade olive oil, and farmers we know by name." },
-      { property: "og:title", content: "Our Story — Olea & Ember" },
-      { property: "og:description", content: "Rustic Mediterranean, handmade olive oil, and a kitchen built around fire." },
+      { title: "Our Story — Aslan Cafe Luxe & Resto" },
+      { name: "description", content: "The story behind Aslan Cafe Luxe & Resto: passion for gourmet flavors, luxury dining, and the finest ingredients in Kigali." },
+      { property: "og:title", content: "Our Story — Aslan Cafe Luxe & Resto" },
+      { property: "og:description", content: "Gourmet dining, luxury atmosphere, and a passion for excellence in Kigali." },
     ],
   }),
   component: AboutPage,
@@ -35,9 +35,9 @@ function AboutPage() {
         <span className="font-script text-3xl text-terracotta">a small restaurant</span>
         <h1 className="mt-2 font-display text-5xl md:text-6xl">Cooking slowly, on purpose.</h1>
         <p className="mx-auto mt-6 text-lg leading-relaxed text-muted-foreground">
-          Olea &amp; Ember began in 2019 as a tiny counter in Williamsburg with one wood-burning oven,
-          four stools, and a bottle of olive oil pressed from Mira's family grove outside Kalamata.
-          It has grown — a little — but those three things still anchor the kitchen.
+          Aslan Cafe Luxe &amp; Resto began as a vision for premium dining in the heart of Kigali.
+          Our mission is to bring together the finest local ingredients with international gourmet techniques,
+          creating an atmosphere where luxury meets the plate.
         </p>
         <div className="divider-organic mx-auto mt-10" />
       </section>
@@ -71,27 +71,27 @@ function AboutPage() {
           <h2 className="font-display text-3xl md:text-4xl">Three stubborn ideas</h2>
           <ul className="mt-6 space-y-5 text-muted-foreground">
             <li>
-              <span className="font-display text-lg text-foreground">Fire, always.</span><br />
-              One oven. One flame. Every dish says hello to it.
+              <span className="font-display text-lg text-foreground">Exquisite Flavors.</span><br />
+              We blend tradition with luxury, ensuring every bite is a masterpiece.
             </li>
             <li>
-              <span className="font-display text-lg text-foreground">Oil as a condiment.</span><br />
-              Our family press arrives twice a year. It finishes almost everything.
+              <span className="font-display text-lg text-foreground">Premium Ingredients.</span><br />
+              We source the rarest and finest ingredients from around the world and our local lands.
             </li>
             <li>
-              <span className="font-display text-lg text-foreground">Small farms we know.</span><br />
-              We cook what's grown within a day's drive. The menu follows the harvest.
+              <span className="font-display text-lg text-foreground">Unmatched Atmosphere.</span><br />
+              Dining is an experience. We provide a space where luxury and comfort coexist.
             </li>
           </ul>
         </div>
 
         <div className="rounded-[2.5rem] border border-border/60 bg-card/70 p-8 backdrop-blur">
-          <p className="font-script text-3xl text-terracotta">— Mira Kavalis</p>
-          <p className="mt-2 text-xs uppercase tracking-[0.25em] text-muted-foreground">Owner & Chef</p>
+          <p className="font-script text-3xl text-terracotta">— Aslan Team</p>
+          <p className="mt-2 text-xs uppercase tracking-[0.25em] text-muted-foreground">Founders & Culinary Team</p>
           <p className="mt-6 leading-relaxed text-muted-foreground">
-            "I grew up eating at my grandmother's table in Kalamata, where a good meal meant
-            a long one. Olea &amp; Ember is my attempt to pass that on — a plate of bread,
-            a glass of something honest, and the rest of the night figuring itself out."
+            "Our goal is to create a sanctuary of taste. At Aslan Cafe Luxe &amp; Resto,
+            we believe that dining is an art form, and every guest deserves a performance
+            of flavors and elegance that stays with them long after the meal."
           </p>
         </div>
       </section>

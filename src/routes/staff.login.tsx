@@ -7,7 +7,7 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/staff/login")({
   head: () => ({
     meta: [
-      { title: "Staff Login — Olea & Ember" },
+      { title: "Staff Login — Aslan Cafe Luxe & Resto" },
       { name: "robots", content: "noindex" },
     ],
   }),

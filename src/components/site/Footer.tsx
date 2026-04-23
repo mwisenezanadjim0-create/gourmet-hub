@@ -7,11 +7,11 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-4">
         <div>
           <div className="mb-4">
-            <span className="block font-script text-3xl text-terracotta">Olea</span>
-            <span className="block font-display text-2xl tracking-[0.3em]">&amp; EMBER</span>
+            <span className="block font-script text-3xl text-terracotta">Aslan Cafe</span>
+            <span className="block font-display text-2xl tracking-[0.3em]">LUXE &amp; RESTO</span>
           </div>
           <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
-            A rustic Mediterranean table. Wood fire, olive oil, patience & the people who raise the ingredients.
+            Exquisite flavors, premium dining, and a touch of luxury in every dish.
           </p>
           <div className="mt-6 flex gap-3">
             <a
@@ -54,7 +54,7 @@ export function Footer() {
             </li>
             <li className="flex items-start gap-2">
               <Mail className="mt-0.5 h-4 w-4 shrink-0 text-terracotta" />
-              <a href="mailto:hello@oleaandember.com" className="hover:text-terracotta">hello@oleaandember.com</a>
+              <a href="mailto:hello@aslancafeluxe.com" className="hover:text-terracotta">hello@aslancafeluxe.com</a>
             </li>
             <li className="text-muted-foreground">
               Owner & Chef<br />
@@ -75,7 +75,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-border/60 py-5 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} Olea &amp; Ember · Crafted with fire & olive oil
+        © {new Date().getFullYear()} Aslan Cafe Luxe &amp; Resto · Crafted with passion & luxury
       </div>
     </footer>
   );

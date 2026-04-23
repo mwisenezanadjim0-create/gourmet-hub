@@ -33,15 +33,15 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Olea & Ember — Rustic Mediterranean, wood-fired & seasonal" },
+      { title: "Aslan Cafe Luxe & Resto — Luxury Dining & Exquisite Flavors" },
       {
         name: "description",
         content:
-          "Olea & Ember is a rustic Mediterranean restaurant in Brooklyn. Wood-fired, seasonal, olive-oil-first cooking. Order online for pickup or delivery.",
+          "Aslan Cafe Luxe & Resto offers a premium dining experience. Luxury atmosphere, gourmet flavors, and exceptional service in the heart of the city.",
       },
-      { name: "author", content: "Olea & Ember" },
-      { property: "og:title", content: "Olea & Ember — Rustic Mediterranean" },
-      { property: "og:description", content: "Wood-fired, seasonal, olive-oil-first. Brooklyn, NY." },
+      { name: "author", content: "Aslan Cafe Luxe & Resto" },
+      { property: "og:title", content: "Aslan Cafe Luxe & Resto — Luxury Dining" },
+      { property: "og:description", content: "Luxury dining, gourmet flavors, and exceptional service." },
       { property: "og:type", content: "restaurant" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

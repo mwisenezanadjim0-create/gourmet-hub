@@ -11,13 +11,13 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Olea & Ember — Rustic Mediterranean in Brooklyn" },
+      { title: "Aslan Cafe Luxe & Resto — Luxury Dining in Kigali" },
       {
         name: "description",
-        content: "Wood-fired, seasonal Mediterranean cooking. Olive oil, embers, and produce from farms we know.",
+        content: "Experience gourmet flavors and luxury dining at Aslan Cafe Luxe & Resto. Premium dining in the heart of Kigali.",
       },
-      { property: "og:title", content: "Olea & Ember — Rustic Mediterranean in Brooklyn" },
-      { property: "og:description", content: "Wood-fired, seasonal Mediterranean cooking in Brooklyn." },
+      { property: "og:title", content: "Aslan Cafe Luxe & Resto — Luxury Dining in Kigali" },
+      { property: "og:description", content: "Experience gourmet flavors and luxury dining at Aslan Cafe Luxe & Resto." },
     ],
   }),
   component: HomePage,
@@ -46,7 +46,7 @@ function HomePage() {
         <div className="mx-auto grid max-w-7xl gap-10 px-6 pb-20 pt-10 md:grid-cols-[1.05fr_1fr] md:gap-16 md:pt-16">
           <div className="relative z-10 flex flex-col justify-center">
             <span className="mb-6 inline-flex items-center gap-2 text-sm uppercase tracking-[0.35em] text-olive">
-              <span className="h-px w-10 bg-olive/60" /> Brooklyn · est. 2019
+              <span className="h-px w-10 bg-olive/60" /> Kigali · est. 2024
             </span>
             <h1 className="font-display text-5xl leading-[1.02] sm:text-6xl md:text-7xl">
               Cooked over <span className="italic text-terracotta">embers.</span>
@@ -54,8 +54,8 @@ function HomePage() {
               Dressed in <span className="font-script text-6xl text-gold md:text-7xl">olive oil.</span>
             </h1>
             <p className="mt-8 max-w-lg text-lg leading-relaxed text-muted-foreground">
-              A rustic Mediterranean table in the heart of Williamsburg. We cook slowly,
-              source stubbornly, and pour generously.
+              A premium dining experience in the heart of Kigali. We craft with passion,
+              source only the finest ingredients, and serve with luxury in mind.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
               <Link

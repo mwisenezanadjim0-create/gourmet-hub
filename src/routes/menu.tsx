@@ -10,10 +10,10 @@ import { Plus } from "lucide-react";
 export const Route = createFileRoute("/menu")({
   head: () => ({
     meta: [
-      { title: "Menu — Olea & Ember" },
-      { name: "description", content: "Our seasonal Mediterranean menu: starters, wood-fired mains, desserts, and a short, smart drinks list." },
-      { property: "og:title", content: "Menu — Olea & Ember" },
-      { property: "og:description", content: "Seasonal Mediterranean menu from our Brooklyn kitchen." },
+      { title: "Menu — Aslan Cafe Luxe & Resto" },
+      { name: "description", content: "Explore our gourmet menu featuring luxury dishes and exquisite flavors." },
+      { property: "og:title", content: "Menu — Aslan Cafe Luxe & Resto" },
+      { property: "og:description", content: "Gourmet flavors and luxury dishes from our kitchen in Kigali." },
     ],
   }),
   component: MenuPage,

@@ -17,7 +17,7 @@ export function Header() {
         <Link to="/" className="group flex items-center gap-3 leading-none">
           <div className="relative h-12 w-12 overflow-hidden rounded-full border-2 border-gold shadow-lg transition-transform group-hover:scale-110">
             <img 
-              src="/logo.png" 
+              src="/aslanlogo.png" 
               alt="Aslan Cafe Logo" 
               className="h-full w-full object-cover"
               onError={(e) => {
@@ -37,8 +37,8 @@ export function Header() {
               key={link.to}
               to={link.to}
               activeOptions={{ exact: link.exact }}
-              activeProps={{ className: "text-terracotta" }}
-              inactiveProps={{ className: "text-foreground/80 hover:text-terracotta" }}
+              activeProps={{ className: "text-gold" }}
+              inactiveProps={{ className: "text-foreground/80 hover:text-gold" }}
               className="relative text-sm uppercase tracking-[0.22em] transition-colors"
             >
               {link.label}
@@ -49,18 +49,18 @@ export function Header() {
         <div className="flex items-center gap-3">
           <Link
             to="/menu"
-            className="hidden rounded-full border border-terracotta px-5 py-2 text-xs uppercase tracking-[0.22em] text-terracotta transition-colors hover:bg-terracotta hover:text-primary-foreground sm:inline-block"
+            className="hidden rounded-full border border-gold px-5 py-2 text-xs uppercase tracking-[0.22em] text-gold transition-colors hover:bg-gold hover:text-primary-foreground sm:inline-block"
           >
             Order Now
           </Link>
           <Link
             to="/cart"
             aria-label="View cart"
-            className="relative inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:border-terracotta hover:text-terracotta"
+            className="relative inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:border-gold hover:text-gold"
           >
             <ShoppingBag className="h-5 w-5" />
             {count > 0 && (
-              <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-terracotta px-1 text-[10px] font-semibold text-primary-foreground">
+              <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-gold px-1 text-[10px] font-semibold text-primary-foreground">
                 {count}
               </span>
             )}

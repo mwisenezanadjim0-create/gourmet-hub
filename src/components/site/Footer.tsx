@@ -6,10 +6,15 @@ export function Footer() {
     <footer className="mt-24 border-t border-border/60 bg-[color-mix(in_oklab,var(--olive)_18%,var(--background))]">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-4">
         <div>
-          <div className="mb-4">
-            <span className="block font-script text-3xl text-terracotta">Aslan Cafe</span>
-            <span className="block font-display text-2xl tracking-[0.3em]">LUXE &amp; RESTO</span>
-          </div>
+            <div className="mb-4 flex items-center gap-3">
+              <div className="h-12 w-12 overflow-hidden rounded-full border border-gold/30">
+                <img src="/aslanlogo.png" alt="Aslan Cafe Logo" className="h-full w-full object-cover" />
+              </div>
+              <div className="flex flex-col">
+                <span className="block font-script text-2xl text-gold">Aslan Cafe</span>
+                <span className="block font-display text-xs tracking-[0.3em] uppercase text-foreground/70">LUXE &amp; RESTO</span>
+              </div>
+            </div>
           <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
             Exquisite flavors, premium dining, and a touch of luxury in every dish.
           </p>

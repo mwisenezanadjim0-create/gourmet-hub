@@ -1,6 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteLayout";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import Fade from "embla-carousel-fade";
 import interior from "@/assets/about-interior.jpg";
@@ -15,9 +21,16 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "Our Story — Aslan Cafe Luxe & Resto" },
-      { name: "description", content: "The story behind Aslan Cafe Luxe & Resto: passion for gourmet flavors, luxury dining, and the finest ingredients in Kigali." },
+      {
+        name: "description",
+        content:
+          "The story behind Aslan Cafe Luxe & Resto: passion for gourmet flavors, luxury dining, and the finest ingredients in Kigali.",
+      },
       { property: "og:title", content: "Our Story — Aslan Cafe Luxe & Resto" },
-      { property: "og:description", content: "Gourmet dining, luxury atmosphere, and a passion for excellence in Kigali." },
+      {
+        property: "og:description",
+        content: "Gourmet dining, luxury atmosphere, and a passion for excellence in Kigali.",
+      },
     ],
   }),
   component: AboutPage,
@@ -43,18 +56,26 @@ function AboutPage() {
     <SiteLayout>
       {/* Intro Slider */}
       <section className="relative w-full">
-        <Carousel 
-          className="w-full" 
+        <Carousel
+          className="w-full"
           opts={{ loop: true }}
           plugins={[Autoplay({ delay: 4000 }), Fade()]}
         >
           <CarouselContent>
             {introSlides.map((slide, index) => (
-              <CarouselItem key={index} className="relative h-[60vh] min-h-[400px] w-full">
-                <img src={slide.src} alt={slide.title} className="absolute inset-0 h-full w-full object-cover brightness-75" />
+              <CarouselItem key={index} className="relative h-[60vh] min-h-100 w-full">
+                <img
+                  src={slide.src}
+                  alt={slide.title}
+                  className="absolute inset-0 h-full w-full object-cover brightness-75"
+                />
                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-background/20 p-6 text-center">
-                  <span className="font-script text-4xl text-gold drop-shadow-md md:text-5xl">{slide.subtitle}</span>
-                  <h1 className="mt-4 font-display text-5xl text-white drop-shadow-lg md:text-7xl">{slide.title}</h1>
+                  <span className="font-script text-4xl text-gold drop-shadow-md md:text-5xl">
+                    {slide.subtitle}
+                  </span>
+                  <h1 className="mt-4 font-display text-5xl text-white drop-shadow-lg md:text-7xl">
+                    {slide.title}
+                  </h1>
                 </div>
               </CarouselItem>
             ))}
@@ -71,8 +92,8 @@ function AboutPage() {
         <h2 className="mt-2 font-display text-5xl md:text-6xl">Cooking slowly, on purpose.</h2>
         <p className="mx-auto mt-6 text-lg leading-relaxed text-muted-foreground">
           Aslan Cafe Luxe &amp; Resto began as a vision for premium dining in the heart of Kigali.
-          Our mission is to bring together the finest local ingredients with international gourmet techniques,
-          creating an atmosphere where luxury meets the plate.
+          Our mission is to bring together the finest local ingredients with international gourmet
+          techniques, creating an atmosphere where luxury meets the plate.
         </p>
         <div className="divider-organic mx-auto mt-10" />
       </section>
@@ -80,23 +101,65 @@ function AboutPage() {
       {/* Gallery — asymmetric grid */}
       <section className="mx-auto max-w-7xl px-6 py-14">
         <div className="grid grid-cols-2 gap-4 md:grid-cols-12 md:gap-6">
-          <div className="col-span-2 aspect-[4/3] overflow-hidden rounded-[2rem] md:col-span-7 md:row-span-2 md:aspect-auto">
-            <img src={gallery[0].src} alt={gallery[0].alt} loading="lazy" className="h-full w-full object-cover" width={1200} height={900} />
+          <div className="col-span-2 aspect-4/3 overflow-hidden rounded-[2rem] md:col-span-7 md:row-span-2 md:aspect-auto">
+            <img
+              src={gallery[0].src}
+              alt={gallery[0].alt}
+              loading="lazy"
+              className="h-full w-full object-cover"
+              width={1200}
+              height={900}
+            />
           </div>
           <div className="col-span-1 aspect-square overflow-hidden rounded-[2rem] md:col-span-5 md:aspect-[5/4]">
-            <img src={gallery[1].src} alt={gallery[1].alt} loading="lazy" className="h-full w-full object-cover" width={1200} height={900} />
+            <img
+              src={gallery[1].src}
+              alt={gallery[1].alt}
+              loading="lazy"
+              className="h-full w-full object-cover"
+              width={1200}
+              height={900}
+            />
           </div>
           <div className="col-span-1 aspect-square overflow-hidden rounded-[2rem] md:col-span-5 md:aspect-[5/4]">
-            <img src={gallery[2].src} alt={gallery[2].alt} loading="lazy" className="h-full w-full object-cover" width={1200} height={900} />
+            <img
+              src={gallery[2].src}
+              alt={gallery[2].alt}
+              loading="lazy"
+              className="h-full w-full object-cover"
+              width={1200}
+              height={900}
+            />
           </div>
-          <div className="col-span-2 aspect-[16/9] overflow-hidden rounded-[2rem] md:col-span-4 md:aspect-[4/3]">
-            <img src={gallery[3].src} alt={gallery[3].alt} loading="lazy" className="h-full w-full object-cover" width={1200} height={900} />
+          <div className="col-span-2 aspect-video overflow-hidden rounded-[2rem] md:col-span-4 md:aspect-4/3">
+            <img
+              src={gallery[3].src}
+              alt={gallery[3].alt}
+              loading="lazy"
+              className="h-full w-full object-cover"
+              width={1200}
+              height={900}
+            />
           </div>
           <div className="col-span-1 aspect-square overflow-hidden rounded-[2rem] md:col-span-4 md:aspect-[4/3]">
-            <img src={gallery[4].src} alt={gallery[4].alt} loading="lazy" className="h-full w-full object-cover" width={1200} height={900} />
+            <img
+              src={gallery[4].src}
+              alt={gallery[4].alt}
+              loading="lazy"
+              className="h-full w-full object-cover"
+              width={1200}
+              height={900}
+            />
           </div>
           <div className="col-span-1 aspect-square overflow-hidden rounded-[2rem] md:col-span-4 md:aspect-[4/3]">
-            <img src={gallery[5].src} alt={gallery[5].alt} loading="lazy" className="h-full w-full object-cover" width={1200} height={900} />
+            <img
+              src={gallery[5].src}
+              alt={gallery[5].alt}
+              loading="lazy"
+              className="h-full w-full object-cover"
+              width={1200}
+              height={900}
+            />
           </div>
         </div>
       </section>
@@ -106,15 +169,18 @@ function AboutPage() {
           <h2 className="font-display text-3xl md:text-4xl">Three stubborn ideas</h2>
           <ul className="mt-6 space-y-5 text-muted-foreground">
             <li>
-              <span className="font-display text-lg text-foreground">Exquisite Flavors.</span><br />
+              <span className="font-display text-lg text-foreground">Exquisite Flavors.</span>
+              <br />
               We blend tradition with luxury, ensuring every bite is a masterpiece.
             </li>
             <li>
-              <span className="font-display text-lg text-foreground">Premium Ingredients.</span><br />
+              <span className="font-display text-lg text-foreground">Premium Ingredients.</span>
+              <br />
               We source the rarest and finest ingredients from around the world and our local lands.
             </li>
             <li>
-              <span className="font-display text-lg text-foreground">Unmatched Atmosphere.</span><br />
+              <span className="font-display text-lg text-foreground">Unmatched Atmosphere.</span>
+              <br />
               Dining is an experience. We provide a space where luxury and comfort coexist.
             </li>
           </ul>
@@ -122,11 +188,13 @@ function AboutPage() {
 
         <div className="rounded-[2.5rem] border border-border/60 bg-card/70 p-8 backdrop-blur">
           <p className="font-script text-3xl text-terracotta">— Aslan Team</p>
-          <p className="mt-2 text-xs uppercase tracking-[0.25em] text-muted-foreground">Founders & Culinary Team</p>
+          <p className="mt-2 text-xs uppercase tracking-[0.25em] text-muted-foreground">
+            Founders & Culinary Team
+          </p>
           <p className="mt-6 leading-relaxed text-muted-foreground">
-            "Our goal is to create a sanctuary of taste. At Aslan Cafe Luxe &amp; Resto,
-            we believe that dining is an art form, and every guest deserves a performance
-            of flavors and elegance that stays with them long after the meal."
+            "Our goal is to create a sanctuary of taste. At Aslan Cafe Luxe &amp; Resto, we believe
+            that dining is an art form, and every guest deserves a performance of flavors and
+            elegance that stays with them long after the meal."
           </p>
         </div>
       </section>

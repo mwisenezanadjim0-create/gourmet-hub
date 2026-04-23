@@ -59,7 +59,12 @@ function CartPage() {
       const res = await checkoutFn({
         data: {
           customer: parsed.data,
-          items: items.map((i) => ({ id: i.id, name: i.name, price: i.price, quantity: i.quantity })),
+          items: items.map((i) => ({
+            id: i.id,
+            name: i.name,
+            price: i.price,
+            quantity: i.quantity,
+          })),
         },
       });
       if (res.checkoutUrl) {
@@ -108,7 +113,13 @@ function CartPage() {
               >
                 <div className="aspect-square w-24 overflow-hidden rounded-xl sm:w-28">
                   {imageForSlug(item.slug) ? (
-                    <img src={imageForSlug(item.slug)} alt={item.name} className="h-full w-full object-cover" width={200} height={200} />
+                    <img
+                      src={imageForSlug(item.slug)}
+                      alt={item.name}
+                      className="h-full w-full object-cover"
+                      width={200}
+                      height={200}
+                    />
                   ) : (
                     <div className="h-full w-full bg-muted" />
                   )}
@@ -116,7 +127,11 @@ function CartPage() {
                 <div className="flex min-w-0 flex-1 flex-col">
                   <div className="flex items-start justify-between gap-3">
                     <h3 className="font-display text-lg">{item.name}</h3>
-                    <button onClick={() => remove(item.id)} aria-label="Remove" className="text-muted-foreground hover:text-destructive">
+                    <button
+                      onClick={() => remove(item.id)}
+                      aria-label="Remove"
+                      className="text-muted-foreground hover:text-destructive"
+                    >
                       <Trash2 className="h-4 w-4" />
                     </button>
                   </div>
@@ -139,7 +154,9 @@ function CartPage() {
                         <Plus className="h-3.5 w-3.5" />
                       </button>
                     </div>
-                    <span className="font-display text-lg text-terracotta">{formatPrice(item.price * item.quantity)}</span>
+                    <span className="font-display text-lg text-terracotta">
+                      {formatPrice(item.price * item.quantity)}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -200,7 +217,10 @@ function CartPage() {
             </Field>
 
             <div className="space-y-2 border-t border-border pt-5 text-sm">
-              <Row label={`Subtotal (${count} item${count === 1 ? "" : "s"})`} value={formatPrice(subtotal)} />
+              <Row
+                label={`Subtotal (${count} item${count === 1 ? "" : "s"})`}
+                value={formatPrice(subtotal)}
+              />
               <Row label="Tax" value={formatPrice(tax)} />
               <Row label="Total" value={formatPrice(total)} bold />
             </div>
@@ -212,7 +232,9 @@ function CartPage() {
             >
               {submitting ? "Processing…" : "Pay & Place Order"}
             </button>
-            <p className="text-center text-xs text-muted-foreground">Secure checkout · powered by Stripe</p>
+            <p className="text-center text-xs text-muted-foreground">
+              Secure checkout · powered by Stripe
+            </p>
           </form>
         </section>
       )}
@@ -236,7 +258,15 @@ function CartPage() {
   );
 }
 
-function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
+function Field({
+  label,
+  required,
+  children,
+}: {
+  label: string;
+  required?: boolean;
+  children: React.ReactNode;
+}) {
   return (
     <label className="block">
       <span className="mb-1.5 block text-xs uppercase tracking-[0.2em] text-muted-foreground">
@@ -249,7 +279,9 @@ function Field({ label, required, children }: { label: string; required?: boolea
 
 function Row({ label, value, bold }: { label: string; value: string; bold?: boolean }) {
   return (
-    <div className={`flex justify-between ${bold ? "font-display text-lg text-foreground" : "text-muted-foreground"}`}>
+    <div
+      className={`flex justify-between ${bold ? "font-display text-lg text-foreground" : "text-muted-foreground"}`}
+    >
       <span>{label}</span>
       <span>{value}</span>
     </div>

@@ -14,10 +14,14 @@ export const Route = createFileRoute("/")({
       { title: "Aslan Cafe Luxe & Resto — Luxury Dining in Kigali" },
       {
         name: "description",
-        content: "Experience gourmet flavors and luxury dining at Aslan Cafe Luxe & Resto. Premium dining in the heart of Kigali.",
+        content:
+          "Experience gourmet flavors and luxury dining at Aslan Cafe Luxe & Resto. Premium dining in the heart of Kigali.",
       },
       { property: "og:title", content: "Aslan Cafe Luxe & Resto — Luxury Dining in Kigali" },
-      { property: "og:description", content: "Experience gourmet flavors and luxury dining at Aslan Cafe Luxe & Resto." },
+      {
+        property: "og:description",
+        content: "Experience gourmet flavors and luxury dining at Aslan Cafe Luxe & Resto.",
+      },
     ],
   }),
   component: HomePage,
@@ -54,8 +58,8 @@ function HomePage() {
               of <span className="font-script text-7xl text-gold md:text-9xl">luxury coffee.</span>
             </h1>
             <p className="mt-8 max-w-lg text-xl leading-relaxed text-muted-foreground/90">
-              An exclusive sanctuary in Kigali. We craft with precision,
-              source the rarest beans, and serve with uncompromising elegance.
+              An exclusive sanctuary in Kigali. We craft with precision, source the rarest beans,
+              and serve with uncompromising elegance.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
@@ -77,11 +81,21 @@ function HomePage() {
             <div className="absolute -right-10 -top-10 h-72 w-72 rounded-full bg-gold/25 blur-3xl" />
             <div className="absolute -bottom-10 left-8 h-64 w-64 rounded-full bg-terracotta/25 blur-3xl" />
             <div className="relative aspect-[4/5] overflow-hidden rounded-[3rem] border border-border/60 shadow-2xl shadow-foreground/10">
-              <img src={heroDish} alt="Lamb with olives and pomegranate on terracotta" className="h-full w-full object-cover" width={1600} height={2000} />
+              <img
+                src={heroDish}
+                alt="Lamb with olives and pomegranate on terracotta"
+                className="h-full w-full object-cover"
+                width={1600}
+                height={2000}
+              />
             </div>
             <div className="absolute -left-6 bottom-10 hidden rotate-[-6deg] rounded-2xl bg-card/95 px-6 py-4 shadow-2xl backdrop-blur-xl border border-gold/20 md:block">
-              <p className="font-script text-2xl text-gold">"The pinnacle of Kigali's coffee culture"</p>
-              <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground/70">— Luxury Travel Guide</p>
+              <p className="font-script text-2xl text-gold">
+                "The pinnacle of Kigali's coffee culture"
+              </p>
+              <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground/70">
+                — Luxury Travel Guide
+              </p>
             </div>
           </div>
         </div>
@@ -91,20 +105,31 @@ function HomePage() {
       <section className="mx-auto max-w-7xl px-6 py-20">
         <div className="grid items-center gap-14 md:grid-cols-2">
           <div className="relative aspect-[5/4] overflow-hidden rounded-[2.5rem]">
-            <img src={aboutInterior} alt="Warm candlelit interior" className="h-full w-full object-cover" loading="lazy" width={1200} height={900} />
+            <img
+              src={aboutInterior}
+              alt="Warm candlelit interior"
+              className="h-full w-full object-cover"
+              loading="lazy"
+              width={1200}
+              height={900}
+            />
           </div>
           <div>
             <span className="mb-6 inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-olive">
               <span className="h-px w-8 bg-olive/60" /> Our Kitchen
             </span>
             <h2 className="font-display text-4xl leading-tight md:text-5xl">
-              A sanctuary built around <span className="italic text-gold">perfection</span> and the pursuit of taste.
+              A sanctuary built around <span className="italic text-gold">perfection</span> and the
+              pursuit of taste.
             </h2>
             <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-              Rare beans sourced from the volcanic soils of our region, roasted to perfection.
-              We believe that every cup should be a moment of absolute luxury.
+              Rare beans sourced from the volcanic soils of our region, roasted to perfection. We
+              believe that every cup should be a moment of absolute luxury.
             </p>
-            <Link to="/about" className="mt-8 inline-flex items-center gap-2 text-sm uppercase tracking-[0.25em] text-terracotta hover:gap-3 transition-all">
+            <Link
+              to="/about"
+              className="mt-8 inline-flex items-center gap-2 text-sm uppercase tracking-[0.25em] text-terracotta hover:gap-3 transition-all"
+            >
               Meet the table <span aria-hidden>→</span>
             </Link>
           </div>
@@ -114,7 +139,9 @@ function HomePage() {
       {/* FEATURED DISHES */}
       <section className="mx-auto max-w-7xl px-6 py-20">
         <div className="flex flex-col items-center text-center">
-          <span className="text-xs uppercase tracking-[0.3em] text-olive">Tonight's Highlights</span>
+          <span className="text-xs uppercase tracking-[0.3em] text-olive">
+            Tonight's Highlights
+          </span>
           <h2 className="mt-4 font-display text-4xl md:text-5xl">From the fire</h2>
           <div className="divider-organic mt-6" />
         </div>
@@ -140,12 +167,21 @@ function HomePage() {
               <div className="flex flex-1 flex-col p-6">
                 <div className="flex items-baseline justify-between gap-3">
                   <h3 className="font-display text-xl">{item.name}</h3>
-                  <span className="font-display text-lg text-terracotta">{formatPrice(Number(item.price))}</span>
+                  <span className="font-display text-lg text-terracotta">
+                    {formatPrice(Number(item.price))}
+                  </span>
                 </div>
-                <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{item.description}</p>
+                <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
+                  {item.description}
+                </p>
                 <button
                   onClick={() => {
-                    add({ id: item.id, slug: item.slug, name: item.name, price: Number(item.price) });
+                    add({
+                      id: item.id,
+                      slug: item.slug,
+                      name: item.name,
+                      price: Number(item.price),
+                    });
                     toast.success(`Added ${item.name}`);
                   }}
                   className="mt-5 self-start rounded-full border border-terracotta px-4 py-1.5 text-xs uppercase tracking-[0.2em] text-terracotta transition-colors hover:bg-terracotta hover:text-primary-foreground"
@@ -172,14 +208,24 @@ function HomePage() {
         <div className="mx-auto max-w-6xl px-6">
           <div className="grid gap-8 md:grid-cols-3">
             {[
-              { q: "The kind of place you leave feeling slower, better, brighter.", a: "Infatuation" },
+              {
+                q: "The kind of place you leave feeling slower, better, brighter.",
+                a: "Infatuation",
+              },
               { q: "A fire-kissed homage to the Mediterranean.", a: "New York Times" },
               { q: "Every plate tastes like somebody's grandmother cared.", a: "Resy Review" },
             ].map((t) => (
-              <figure key={t.a} className="relative rounded-3xl border border-border/60 bg-card/70 p-8 shadow-sm backdrop-blur">
-                <div className="absolute -top-4 left-6 font-display text-6xl leading-none text-terracotta/40">"</div>
+              <figure
+                key={t.a}
+                className="relative rounded-3xl border border-border/60 bg-card/70 p-8 shadow-sm backdrop-blur"
+              >
+                <div className="absolute -top-4 left-6 font-display text-6xl leading-none text-terracotta/40">
+                  "
+                </div>
                 <blockquote className="font-display text-xl leading-snug">{t.q}</blockquote>
-                <figcaption className="mt-6 text-xs uppercase tracking-[0.25em] text-muted-foreground">— {t.a}</figcaption>
+                <figcaption className="mt-6 text-xs uppercase tracking-[0.25em] text-muted-foreground">
+                  — {t.a}
+                </figcaption>
               </figure>
             ))}
           </div>

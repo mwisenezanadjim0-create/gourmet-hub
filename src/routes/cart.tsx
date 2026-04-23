@@ -3,7 +3,7 @@ import { SiteLayout } from "@/components/site/SiteLayout";
 import { useCart, formatPrice } from "@/lib/cart";
 import { imageForSlug } from "@/lib/menu-images";
 import { Minus, Plus, Trash2 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { z } from "zod";
 import { toast } from "sonner";
 import { createCheckoutSession } from "@/server/checkout";
@@ -42,6 +42,22 @@ function CartPage() {
 
   const tax = subtotal * 0.08875;
   const total = subtotal + tax;
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("reveal-active");
+          }
+        });
+      },
+      { threshold: 0.1 },
+    );
+
+    document.querySelectorAll(".reveal-on-scroll").forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [items]);
 
   async function handleCheckout(e: React.FormEvent) {
     e.preventDefault();
@@ -86,7 +102,7 @@ function CartPage() {
 
   return (
     <SiteLayout>
-      <section className="mx-auto max-w-6xl px-6 pb-6 pt-14 text-center">
+      <section className="reveal-on-scroll mx-auto max-w-6xl px-6 pb-6 pt-14 text-center">
         <span className="font-script text-3xl text-terracotta">your table</span>
         <h1 className="mt-2 font-display text-5xl">Review your order</h1>
         <div className="divider-organic mx-auto mt-6" />
@@ -106,10 +122,10 @@ function CartPage() {
         <section className="mx-auto grid max-w-6xl gap-10 px-6 pb-24 md:grid-cols-[1.4fr_1fr]">
           {/* Cart list */}
           <div className="space-y-4">
-            {items.map((item) => (
+            {items.map((item, idx) => (
               <div
                 key={item.id}
-                className="flex gap-4 rounded-[1.75rem] border border-border/60 bg-card/80 p-4 shadow-sm backdrop-blur"
+                className={`reveal-on-scroll flex gap-4 rounded-[1.75rem] border border-border/60 bg-card/80 p-4 shadow-sm backdrop-blur reveal-delay-${idx * 100 + 100}`}
               >
                 <div className="aspect-square w-24 overflow-hidden rounded-xl sm:w-28">
                   {imageForSlug(item.slug) ? (
@@ -166,7 +182,7 @@ function CartPage() {
           {/* Checkout form */}
           <form
             onSubmit={handleCheckout}
-            className="h-fit space-y-5 rounded-[2rem] border border-border/60 bg-card/80 p-7 shadow-lg backdrop-blur"
+            className="reveal-on-scroll reveal-delay-200 h-fit space-y-5 rounded-[2rem] border border-border/60 bg-card/80 p-7 shadow-lg backdrop-blur"
           >
             <h2 className="font-display text-2xl">Delivery details</h2>
 

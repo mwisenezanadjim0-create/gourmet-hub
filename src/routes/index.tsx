@@ -4,9 +4,14 @@ import { supabase } from "@/integrations/supabase/client";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { imageForSlug } from "@/lib/menu-images";
 import { useCart, formatPrice } from "@/lib/cart";
-import heroDish from "@/assets/hero-dish.jpg";
 import aboutInterior from "@/assets/about-interior.jpg";
 import { toast } from "sonner";
+import { useState, useEffect, useRef, useCallback } from "react";
+import img1 from "@/assets/1.jpg";
+import img2 from "@/assets/2.jpg";
+import img3 from "@/assets/3.jpg";
+import img4 from "@/assets/4.jpg";
+import img5 from "@/assets/5.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,8 +32,120 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
+const heroSlides = [
+  {
+    src: img1,
+    alt: "Premium coffee and pastry experience",
+    title: {
+      main: "Elevating the",
+      accent: "essence",
+      script: "luxury coffee.",
+    },
+    description: "An exclusive sanctuary in Kigali. We craft with precision, source the rarest beans, and serve with uncompromising elegance.",
+    caption: "The pinnacle of Kigali's coffee culture",
+    label: "Luxury Travel Guide",
+  },
+  {
+    src: img2,
+    alt: "Gourmet dining atmosphere",
+    title: {
+      main: "A sanctuary of",
+      accent: "taste",
+      script: "fine dining.",
+    },
+    description: "Experience culinary excellence where every dish tells a story of passion, precision, and locally sourced perfection.",
+    caption: "A sanctuary of taste & refinement",
+    label: "Fine Dining Weekly",
+  },
+  {
+    src: img3,
+    alt: "Artisan culinary craftsmanship",
+    title: {
+      main: "Crafting every",
+      accent: "detail",
+      script: "culinary art.",
+    },
+    description: "Our chefs blend traditional techniques with modern innovation to create an unforgettable performance of flavors.",
+    caption: "Where every detail is a masterpiece",
+    label: "Gourmet International",
+  },
+  {
+    src: img4,
+    alt: "Luxurious café ambiance",
+    title: {
+      main: "Moments of",
+      accent: "pure",
+      script: "absolute luxury.",
+    },
+    description: "Escape to a world of refined comfort and exquisite taste, right in the heart of Kigali's vibrant culture.",
+    caption: "Luxury redefined, one cup at a time",
+    label: "Prestige Magazine",
+  },
+  {
+    src: img5,
+    alt: "Exquisite flavors and presentation",
+    title: {
+      main: "The art of",
+      accent: "premium",
+      script: "gourmet dining.",
+    },
+    description: "Discover a sanctuary where luxury meets the plate, and every meal is a celebration of the finest ingredients.",
+    caption: "An experience beyond the ordinary",
+    label: "Culinary Arts Review",
+  },
+];
+
 function HomePage() {
   const { add } = useCart();
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [direction, setDirection] = useState(1);
+  const [cardVisible, setCardVisible] = useState(true);
+  const [isPaused, setIsPaused] = useState(false);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const nextSlide = useCallback(() => {
+    setCardVisible(false);
+    setTimeout(() => {
+      setDirection(1);
+      setActiveSlide((prev) => (prev + 1) % heroSlides.length);
+      setCardVisible(true);
+    }, 500);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("reveal-active");
+          }
+        });
+      },
+      { threshold: 0.1, },
+    );
+
+    document.querySelectorAll(".reveal-on-scroll").forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (isPaused) return;
+    intervalRef.current = setInterval(nextSlide, 4500);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [nextSlide, isPaused]);
+
+  const goToSlide = (index: number) => {
+    if (index === activeSlide) return;
+    setCardVisible(false);
+    setTimeout(() => {
+      setDirection(index > activeSlide ? 1 : -1);
+      setActiveSlide(index);
+      setCardVisible(true);
+    }, 400);
+  };
+
   const { data: featured } = useQuery({
     queryKey: ["menu-featured"],
     queryFn: async () => {
@@ -46,21 +163,40 @@ function HomePage() {
   return (
     <SiteLayout>
       {/* HERO */}
-      <section className="relative overflow-hidden">
-        <div className="mx-auto grid max-w-7xl gap-10 px-6 pb-20 pt-10 md:grid-cols-[1.05fr_1fr] md:gap-16 md:pt-16">
+      <section 
+        className="relative overflow-hidden"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
+        <div className="mx-auto grid max-w-7xl gap-10 px-6 pb-20 pt-12 md:grid-cols-[1.05fr_1fr] md:gap-16 md:pt-16">
           <div className="relative z-10 flex flex-col justify-center">
             <span className="mb-6 inline-flex items-center gap-2 text-sm uppercase tracking-[0.35em] text-olive">
               <span className="h-px w-10 bg-olive/60" /> Kigali · est. 2024
             </span>
-            <h1 className="font-display text-5xl leading-[1.02] sm:text-6xl md:text-8xl">
-              Elevating the <span className="italic text-gold">essence</span>
-              <br />
-              of <span className="font-script text-7xl text-gold md:text-9xl">luxury coffee.</span>
-            </h1>
-            <p className="mt-8 max-w-lg text-xl leading-relaxed text-muted-foreground/90">
-              An exclusive sanctuary in Kigali. We craft with precision, source the rarest beans,
-              and serve with uncompromising elegance.
-            </p>
+            <div className="overflow-hidden">
+              <h1
+                className="font-display text-4xl leading-[1.02] transition-all duration-800 ease-out sm:text-6xl md:text-8xl"
+                style={{
+                  opacity: cardVisible ? 1 : 0,
+                  transform: cardVisible ? "translateY(0)" : "translateY(30px)",
+                }}
+              >
+                {heroSlides[activeSlide].title.main} <span className="italic text-gold">{heroSlides[activeSlide].title.accent}</span>
+                <br />
+                of <span className="font-script text-6xl text-gold md:text-9xl">{heroSlides[activeSlide].title.script}</span>
+              </h1>
+            </div>
+            <div className="overflow-hidden">
+              <p
+                className="mt-8 max-w-lg text-lg leading-relaxed text-muted-foreground/90 transition-all delay-150 duration-800 ease-out md:text-xl"
+                style={{
+                  opacity: cardVisible ? 1 : 0,
+                  transform: cardVisible ? "translateY(0)" : "translateY(15px)",
+                }}
+              >
+                {heroSlides[activeSlide].description}
+              </p>
+            </div>
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
                 to="/menu"
@@ -78,37 +214,121 @@ function HomePage() {
           </div>
 
           <div className="relative">
+            {/* Glow orbs */}
             <div className="absolute -right-10 -top-10 h-72 w-72 rounded-full bg-gold/25 blur-3xl" />
             <div className="absolute -bottom-10 left-8 h-64 w-64 rounded-full bg-terracotta/25 blur-3xl" />
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[3rem] border border-border/60 shadow-2xl shadow-foreground/10">
-              <img
-                src={heroDish}
-                alt="Lamb with olives and pomegranate on terracotta"
-                className="h-full w-full object-cover"
-                width={1600}
-                height={2000}
-              />
+
+            {/* Main hero image — sliding slideshow */}
+            <div className="relative aspect-square overflow-hidden rounded-[3rem] border border-border/40 bg-muted shadow-2xl shadow-foreground/5">
+              <div
+                className="flex h-full w-full transition-transform duration-1200 ease-[cubic-bezier(0.23,1,0.32,1)]"
+                style={{ transform: `translateX(-${activeSlide * 100}%)` }}
+              >
+                {heroSlides.map((slide, i) => (
+                  <div key={i} className="relative h-full w-full shrink-0">
+                    <img
+                      src={slide.src}
+                      alt={slide.alt}
+                      width={1600}
+                      height={1600}
+                      className="h-full w-full object-cover transition-transform duration-1200"
+                      style={{
+                        transform: activeSlide === i ? "scale(1)" : "scale(1.1)",
+                      }}
+                    />
+                    {/* Subtle vignette for premium feel */}
+                    <div className="absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-black/10 pointer-events-none" />
+                  </div>
+                ))}
+              </div>
+
+              {/* Slide progress dots */}
+              <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+                {heroSlides.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => goToSlide(i)}
+                    aria-label={`Go to slide ${i + 1}`}
+                    className="group relative h-2 p-1 focus:outline-none"
+                  >
+                    <div 
+                      className="h-1.5 rounded-full transition-all duration-500"
+                      style={{
+                        width: i === activeSlide ? "2.5rem" : "0.5rem",
+                        background: i === activeSlide
+                          ? "var(--gold, #c9a84c)"
+                          : "rgba(255,255,255,0.4)",
+                      }}
+                    />
+                    <div className="absolute -inset-1 rounded-full opacity-0 group-hover:bg-white/10 transition-opacity" />
+                  </button>
+                ))}
+              </div>
             </div>
-            <div className="absolute -left-6 bottom-10 hidden rotate-[-6deg] rounded-2xl bg-card/95 px-6 py-4 shadow-2xl backdrop-blur-xl border border-gold/20 md:block">
-              <p className="font-script text-2xl text-gold">
-                "The pinnacle of Kigali's coffee culture"
-              </p>
-              <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground/70">
-                — Luxury Travel Guide
-              </p>
+
+            {/* Auto-sliding floating card */}
+            <div
+              className="absolute -left-4 bottom-12 hidden -rotate-2 overflow-hidden rounded-3xl border border-gold/15 bg-card/90 shadow-2xl backdrop-blur-2xl transition-all duration-800 ease-[cubic-bezier(0.23,1,0.32,1)] md:block"
+              style={{
+                minWidth: 280,
+                transform: cardVisible
+                  ? "rotate(-2deg) translateY(0) scale(1)"
+                  : "rotate(0deg) translateY(20px) scale(0.95)",
+                opacity: cardVisible ? 1 : 0,
+              }}
+            >
+              {/* Caption area */}
+              <div className="px-5 py-4">
+                <div className="overflow-hidden">
+                  <p
+                    className="font-script text-xl text-gold leading-tight"
+                    style={{
+                      opacity: cardVisible ? 1 : 0,
+                      transform: cardVisible ? "translateY(0)" : "translateY(15px)",
+                      transition: "opacity 500ms ease, transform 500ms ease",
+                    }}
+                  >
+                    &ldquo;{heroSlides[activeSlide].caption}&rdquo;
+                  </p>
+                </div>
+                <div className="overflow-hidden">
+                  <p
+                    className="mt-1.5 text-[9px] uppercase tracking-[0.2em] text-muted-foreground/80 font-medium"
+                    style={{
+                      opacity: cardVisible ? 1 : 0,
+                      transform: cardVisible ? "translateY(0)" : "translateY(10px)",
+                      transition: "opacity 500ms ease 100ms, transform 500ms ease 100ms",
+                    }}
+                  >
+                    — {heroSlides[activeSlide].label}
+                  </p>
+                </div>
+              </div>
+
+              {/* Progress bar at the very bottom */}
+              <div className="relative h-0.5 w-full bg-border/10">
+                <div
+                  className="absolute inset-0 bg-gold/80 transition-all duration-4500 ease-linear"
+                  key={activeSlide}
+                  style={{
+                    width: cardVisible ? "100%" : "0%",
+                    opacity: cardVisible ? 1 : 0,
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* STORY TEASER */}
-      <section className="mx-auto max-w-7xl px-6 py-20">
+      <section className="reveal-on-scroll mx-auto max-w-7xl px-6 py-20">
         <div className="grid items-center gap-14 md:grid-cols-2">
-          <div className="relative aspect-[5/4] overflow-hidden rounded-[2.5rem]">
+          <div className="relative aspect-5/4 overflow-hidden rounded-[2.5rem] shadow-xl">
             <img
               src={aboutInterior}
               alt="Warm candlelit interior"
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover transition-transform duration-1000 hover:scale-105"
               loading="lazy"
               width={1200}
               height={900}
@@ -128,7 +348,7 @@ function HomePage() {
             </p>
             <Link
               to="/about"
-              className="mt-8 inline-flex items-center gap-2 text-sm uppercase tracking-[0.25em] text-terracotta hover:gap-3 transition-all"
+              className="mt-8 inline-flex items-center gap-2 text-sm uppercase tracking-[0.25em] text-terracotta transition-all hover:gap-3"
             >
               Meet the table <span aria-hidden>→</span>
             </Link>
@@ -137,7 +357,7 @@ function HomePage() {
       </section>
 
       {/* FEATURED DISHES */}
-      <section className="mx-auto max-w-7xl px-6 py-20">
+      <section className="reveal-on-scroll mx-auto max-w-7xl px-6 py-20">
         <div className="flex flex-col items-center text-center">
           <span className="text-xs uppercase tracking-[0.3em] text-olive">
             Tonight's Highlights
@@ -147,10 +367,10 @@ function HomePage() {
         </div>
 
         <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {featured?.map((item) => (
+          {featured?.map((item, idx) => (
             <article
               key={item.id}
-              className="group relative flex flex-col overflow-hidden rounded-[2rem] border border-border/60 bg-card/80 shadow-sm backdrop-blur transition-all hover:-translate-y-1 hover:shadow-xl"
+              className={`reveal-on-scroll group relative flex flex-col overflow-hidden rounded-[2rem] border border-border/60 bg-card/80 shadow-sm backdrop-blur transition-all hover:-translate-y-1 hover:shadow-xl reveal-delay-${(idx % 4) * 100 + 100}`}
             >
               <div className="relative aspect-square overflow-hidden">
                 {imageForSlug(item.slug) ? (
@@ -204,7 +424,7 @@ function HomePage() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="bg-[color-mix(in_oklab,var(--olive)_15%,var(--background))] py-20">
+      <section className="reveal-on-scroll bg-[color-mix(in_oklab,var(--olive)_15%,var(--background))] py-20">
         <div className="mx-auto max-w-6xl px-6">
           <div className="grid gap-8 md:grid-cols-3">
             {[
@@ -214,10 +434,10 @@ function HomePage() {
               },
               { q: "A fire-kissed homage to the Mediterranean.", a: "New York Times" },
               { q: "Every plate tastes like somebody's grandmother cared.", a: "Resy Review" },
-            ].map((t) => (
+            ].map((t, idx) => (
               <figure
                 key={t.a}
-                className="relative rounded-3xl border border-border/60 bg-card/70 p-8 shadow-sm backdrop-blur"
+                className={`reveal-on-scroll relative rounded-3xl border border-border/60 bg-card/70 p-8 shadow-sm backdrop-blur reveal-delay-${idx * 100 + 200}`}
               >
                 <div className="absolute -top-4 left-6 font-display text-6xl leading-none text-terracotta/40">
                   "
@@ -233,7 +453,7 @@ function HomePage() {
       </section>
 
       {/* CTA */}
-      <section className="mx-auto max-w-5xl px-6 py-24 text-center">
+      <section className="reveal-on-scroll mx-auto max-w-5xl px-6 py-24 text-center">
         <p className="font-script text-3xl text-terracotta">come hungry —</p>
         <h2 className="mt-3 font-display text-4xl leading-tight md:text-6xl">
           Order tonight. Eat by the fire at home.

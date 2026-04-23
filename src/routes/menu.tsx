@@ -6,6 +6,7 @@ import { imageForSlug } from "@/lib/menu-images";
 import { useCart, formatPrice } from "@/lib/cart";
 import { toast } from "sonner";
 import { Plus } from "lucide-react";
+import { useEffect } from "react";
 
 export const Route = createFileRoute("/menu")({
   head: () => ({
@@ -43,6 +44,22 @@ function MenuPage() {
     },
   });
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("reveal-active");
+          }
+        });
+      },
+      { threshold: 0.1 },
+    );
+
+    document.querySelectorAll(".reveal-on-scroll").forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [data]);
+
   const grouped = CATEGORY_ORDER.map((cat) => ({
     category: cat,
     items: (data ?? []).filter((i) => i.category === cat),
@@ -50,7 +67,7 @@ function MenuPage() {
 
   return (
     <SiteLayout>
-      <section className="mx-auto max-w-6xl px-6 pb-8 pt-16 text-center">
+      <section className="reveal-on-scroll mx-auto max-w-6xl px-6 pb-8 pt-16 text-center">
         <span className="font-script text-3xl text-terracotta">the menu</span>
         <h1 className="mt-2 font-display text-5xl md:text-6xl">A seasonal table</h1>
         <p className="mx-auto mt-5 max-w-xl text-muted-foreground">
@@ -65,7 +82,7 @@ function MenuPage() {
 
         <div className="space-y-20">
           {grouped.map((group) => (
-            <div key={group.category}>
+            <div key={group.category} className="reveal-on-scroll">
               <div className="mb-10 flex items-center gap-6">
                 <h2 className="font-display text-3xl md:text-4xl">{group.category}</h2>
                 <span className="h-px flex-1 bg-border" />
@@ -75,7 +92,7 @@ function MenuPage() {
                 {group.items.map((item, idx) => (
                   <article
                     key={item.id}
-                    className={`group flex gap-5 rounded-[2rem] border border-border/60 bg-card/70 p-5 shadow-sm backdrop-blur transition-all hover:-translate-y-0.5 hover:shadow-xl ${
+                    className={`reveal-on-scroll group flex gap-5 rounded-[2rem] border border-border/60 bg-card/70 p-5 shadow-sm backdrop-blur transition-all hover:-translate-y-0.5 hover:shadow-xl reveal-delay-${(idx % 6) * 100 + 100} ${
                       idx % 2 === 1 ? "md:translate-y-6" : ""
                     }`}
                   >

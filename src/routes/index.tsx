@@ -169,13 +169,13 @@ function HomePage() {
         onMouseLeave={() => setIsPaused(false)}
       >
         <div className="mx-auto grid max-w-7xl w-full gap-10 px-6 pb-24 pt-24 md:grid-cols-[1.1fr_1fr] md:gap-20">
-          <div className="relative z-10 flex flex-col justify-center">
+          <div className="relative z-10 flex flex-col justify-center rounded-[2.5rem] border border-black/5 bg-white/40 p-8 shadow-2xl shadow-black/5 backdrop-blur-md md:border-none md:bg-transparent md:p-0 md:shadow-none md:backdrop-blur-none">
             <span className="mb-6 inline-flex items-center gap-2 text-sm uppercase tracking-[0.35em] text-olive">
               <span className="h-px w-10 bg-olive/60" /> Kigali · est. 2024
             </span>
             <div className="overflow-hidden">
               <h1
-                className="font-display text-4xl leading-[1.02] transition-all duration-800 ease-out sm:text-6xl md:text-8xl"
+                className="font-display text-3xl leading-[1.1] transition-all duration-800 ease-out sm:text-5xl md:text-8xl md:leading-[1.02]"
                 style={{
                   opacity: cardVisible ? 1 : 0,
                   transform: cardVisible ? "translateY(0)" : "translateY(30px)",

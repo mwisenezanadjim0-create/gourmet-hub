@@ -27,7 +27,7 @@ export function Header() {
           </div>
           <div className="flex flex-col">
             <span className="font-script text-2xl text-gold">Aslan Cafe</span>
-            <span className="-mt-1 font-display text-xs tracking-[0.4em] text-foreground/70 uppercase">
+            <span className="-mt-1 font-sans text-[10px] font-medium tracking-[0.45em] text-foreground/60 uppercase">
               Luxe &amp; Resto
             </span>
           </div>

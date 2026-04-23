@@ -20,7 +20,7 @@ type CartState = {
 
 const CartContext = createContext<CartState | null>(null);
 
-const STORAGE_KEY = "olea-ember-cart";
+const STORAGE_KEY = "aslan-cafe-cart";
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
@@ -74,5 +74,9 @@ export function useCart() {
 }
 
 export function formatPrice(n: number) {
-  return `$${n.toFixed(2)}`;
+  return new Intl.NumberFormat("en-RW", {
+    style: "currency",
+    currency: "RWF",
+    minimumFractionDigits: 0,
+  }).format(n);
 }

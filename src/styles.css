@@ -54,6 +54,9 @@
   --font-display: "Fraunces", ui-serif, Georgia, serif;
   --font-script: "Caveat", cursive;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --duration-luxe: 3000ms;
+  --duration-menu: 1500ms;
 }
 
 :root {
@@ -144,10 +147,12 @@
 @layer base {
   * {
     border-color: var(--color-border);
+    transition: all var(--duration-luxe) cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   html {
     font-family: var(--font-sans);
+    scroll-behavior: smooth;
   }
 
   body {
@@ -179,4 +184,14 @@
   height: 24px;
   width: 120px;
   background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24' fill='none' stroke='%238a4a2a' stroke-width='1.6' stroke-linecap='round'><path d='M2 12 C 20 2, 40 22, 60 12 S 100 2, 118 12'/><circle cx='60' cy='12' r='2.2' fill='%238a4a2a' stroke='none'/></svg>") center/contain no-repeat;
+}
+
+/* Specific menu timing */
+nav a, .nav-link {
+  transition-duration: var(--duration-menu) !important;
+}
+
+/* Page load animations */
+.animate-in {
+  animation-duration: var(--duration-luxe);
 }

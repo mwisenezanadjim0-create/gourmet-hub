@@ -317,51 +317,47 @@ function HomePage() {
               </div>
             </div>
 
-            {/* Auto-sliding floating glass card */}
+            {/* Auto-sliding floating card */}
             <div
-              className={`absolute -left-12 bottom-20 z-40 overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#1a0f0a]/60 shadow-[0_20px_50px_rgba(0,0,0,0.3)] backdrop-blur-3xl transition-all duration-800 ease-[cubic-bezier(0.23,1,0.32,1)] min-w-[340px] ${
+              className={`absolute -left-12 bottom-20 z-40 overflow-hidden rounded-3xl border border-white/20 bg-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.15)] backdrop-blur-3xl transition-all duration-800 ease-[cubic-bezier(0.23,1,0.32,1)] min-w-[320px] ${
                 cardVisible
                   ? "-rotate-3 translate-y-0 scale-100 opacity-100"
                   : "rotate-0 translate-y-7.5 scale-90 opacity-0"
               }`}
             >
-              <div className="p-8">
+              <div className="flex flex-col px-7 py-5">
                 <div className="overflow-hidden">
-                  <span className="text-[10px] uppercase tracking-[0.3em] text-gold/80 font-medium">
-                    Artisan Selection
-                  </span>
-                  <h3
-                    className={`mt-1.5 font-display text-2xl text-white leading-tight transition-all duration-500 ${
-                      cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3.75"
-                    }`}
-                  >
-                    {heroSlides[activeSlide].title.main}
-                  </h3>
-                </div>
-                <div className="mt-4 overflow-hidden">
                   <p
-                    className={`font-script text-lg text-gold/90 leading-relaxed transition-all duration-500 delay-75 ${
+                    className={`font-script text-2xl text-gold leading-tight transition-all duration-500 ${
                       cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3.75"
                     }`}
                   >
                     &ldquo;{heroSlides[activeSlide].caption}&rdquo;
                   </p>
                 </div>
-                <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-5">
-                  <span className="text-[9px] uppercase tracking-[0.2em] text-white/50 font-medium">
+                <div className="mt-2 overflow-hidden">
+                  <p
+                    className={`text-[10px] uppercase tracking-[0.25em] text-white/90 font-bold transition-all duration-500 delay-100 ${
+                      cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2.5"
+                    }`}
+                  >
                     — {heroSlides[activeSlide].label}
-                  </span>
+                  </p>
+                </div>
+                <div className="mt-6 overflow-hidden">
                   <Link
                     to="/menu"
-                    className="group/btn flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-gold transition-all hover:gap-3"
+                    className={`inline-flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.3em] text-gold transition-all hover:gap-3 ${
+                      cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2.5"
+                    }`}
                   >
-                    Order Now <span className="transition-transform group-hover/btn:translate-x-1">→</span>
+                    Order Now <span aria-hidden>→</span>
                   </Link>
                 </div>
               </div>
-              <div className="relative h-1 w-full bg-white/5">
+              <div className="relative h-0.5 w-full bg-white/10">
                 <div
-                  className={`absolute inset-0 bg-gold/60 ${
+                  className={`absolute inset-0 bg-gold/80 ${
                     cardVisible ? "w-full opacity-100 slider-progress-bar" : "w-0 opacity-0 slider-progress-reset"
                   }`}
                   key={activeSlide}

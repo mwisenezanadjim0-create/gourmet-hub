@@ -184,24 +184,24 @@ function HomePage() {
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
-        {/* ─── Dynamic Blurred Background (Synced with Slider) ─── */}
+        {/* ─── Dynamic Dark Blurred Background (Synced with Slider) ─── */}
         <div className="absolute inset-0 z-0">
           {heroSlides.map((slide, i) => (
             <div
               key={i}
               className={`absolute inset-0 h-full w-full transition-all duration-1500 ease-in-out ${
-                activeSlide === i ? "opacity-40 z-10 scale-100" : "opacity-0 z-0 scale-110"
+                activeSlide === i ? "opacity-60 z-10 scale-100" : "opacity-0 z-0 scale-110"
               }`}
             >
               <img
                 src={slide.src}
                 alt=""
-                className="h-full w-full object-cover blur-2xl brightness-110"
+                className="h-full w-full object-cover blur-2xl brightness-75 contrast-125"
                 loading="lazy"
               />
             </div>
           ))}
-          <div className="absolute inset-0 bg-linear-to-b from-[#f4ece4]/30 via-transparent to-[#f4ece4]/50" />
+          <div className="absolute inset-0 bg-linear-to-b from-[#1a0f0a]/40 via-[#1a0f0a]/20 to-[#1a0f0a]/60" />
         </div>
 
         {/* ─── Main content grid ─── */}

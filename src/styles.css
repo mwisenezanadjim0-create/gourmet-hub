@@ -158,7 +158,8 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    background-image: radial-gradient(
+    background-image:
+      radial-gradient(
         at 20% 20%,
         color-mix(in oklab, var(--gold) 12%, transparent) 0,
         transparent 40%
@@ -223,8 +224,78 @@ nav a,
 }
 
 /* Staggered Delay Helpers */
-.reveal-delay-100 { transition-delay: 100ms !important; }
-.reveal-delay-200 { transition-delay: 200ms !important; }
-.reveal-delay-300 { transition-delay: 300ms !important; }
-.reveal-delay-400 { transition-delay: 400ms !important; }
+.reveal-delay-100 {
+  transition-delay: 100ms !important;
+}
+.reveal-delay-200 {
+  transition-delay: 200ms !important;
+}
+.reveal-delay-300 {
+  transition-delay: 300ms !important;
+}
+.reveal-delay-400 {
+  transition-delay: 400ms !important;
+}
 .reveal-delay-500 { transition-delay: 500ms !important; }
+
+/* Hero Slider Progress Bar */
+.slider-progress-bar {
+  transition: width 10000ms linear, opacity 500ms ease-out;
+}
+
+.slider-progress-reset {
+  transition: none !important;
+}
+
+/* 3D Curved Slider */
+.banner-3d {
+  width: 100%;
+  height: 550px;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 2000px;
+}
+
+.banner-3d .slider-3d {
+  position: absolute;
+  width: 240px;
+  height: 320px;
+  transform-style: preserve-3d;
+  animation: autoRun 80s linear infinite;
+  z-index: 10;
+}
+
+@keyframes autoRun {
+  from {
+    transform: rotateX(-5deg) rotateY(0deg);
+  }
+  to {
+    transform: rotateX(-5deg) rotateY(360deg);
+  }
+}
+
+.banner-3d .slider-3d .item-3d {
+  position: absolute;
+  inset: 0 0 0 0;
+  transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(500px);
+  transition: transform 0.5s ease;
+}
+
+.banner-3d .slider-3d:hover {
+  animation-play-state: paused;
+}
+
+/* Responsive adjustments for 3D radius */
+@media (max-width: 768px) {
+  .banner-3d .slider-3d .item-3d {
+    transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(320px);
+  }
+  .banner-3d .slider-3d {
+    width: 160px;
+    height: 220px;
+  }
+}

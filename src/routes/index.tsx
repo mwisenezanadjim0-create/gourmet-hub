@@ -392,10 +392,9 @@ function HomePage() {
             </Link>
           </div>
         </div>
-      </section>
 
-      {/* FEATURED DISHES */}
-      <section className="reveal-on-scroll mx-auto max-w-7xl px-6 py-20">
+      {/* FEATURED DISHES: 3D CURVED SLIDER */}
+      <section className="reveal-on-scroll relative overflow-hidden py-20">
         <div className="flex flex-col items-center text-center">
           <span className="text-xs uppercase tracking-[0.3em] text-olive">
             Tonight's Highlights
@@ -404,54 +403,61 @@ function HomePage() {
           <div className="divider-organic mt-6" />
         </div>
 
-        <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {featured?.map((item, idx) => (
-            <article
-              key={item.id}
-              className={`reveal-on-scroll group relative flex flex-col overflow-hidden rounded-[2rem] border border-border/60 bg-card/80 shadow-sm backdrop-blur transition-all hover:-translate-y-1 hover:shadow-xl reveal-delay-${(idx % 4) * 100 + 100}`}
-            >
-              <div className="relative aspect-square overflow-hidden">
-                {imageForSlug(item.slug) ? (
-                  <img
-                    src={imageForSlug(item.slug)}
-                    alt={item.name}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    loading="lazy"
-                    width={768}
-                    height={768}
-                  />
-                ) : null}
-              </div>
-              <div className="flex flex-1 flex-col p-6">
-                <div className="flex items-baseline justify-between gap-3">
-                  <h3 className="font-display text-xl">{item.name}</h3>
-                  <span className="font-display text-lg text-terracotta">
-                    {formatPrice(Number(item.price))}
-                  </span>
+        <div className="banner-3d mt-14">
+          <div
+            className="slider-3d"
+            style={{ "--quantity": featured?.length || 0 } as React.CSSProperties}
+          >
+            {featured?.map((item, idx) => (
+              <div
+                key={item.id}
+                className="item-3d group"
+                style={{ "--position": idx + 1 } as React.CSSProperties}
+              >
+                <div className="relative h-full w-full overflow-hidden rounded-[2rem] border border-white/10 shadow-2xl transition-all duration-500 group-hover:scale-105 group-hover:border-gold/30">
+                  {imageForSlug(item.slug) ? (
+                    <img
+                      src={imageForSlug(item.slug)}
+                      alt={item.name}
+                      className="h-full w-full object-cover"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="h-full w-full bg-muted" />
+                  )}
+
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[#1a0f0a]/80 opacity-0 backdrop-blur-[2px] transition-all duration-500 group-hover:opacity-100">
+                    <p className="px-4 text-center font-display text-lg text-white">
+                      {item.name}
+                    </p>
+                    <div className="flex flex-col gap-2">
+                      <Link
+                        to="/menu"
+                        className="rounded-full bg-white/10 border border-white/20 px-6 py-2.5 text-[9px] font-bold uppercase tracking-[0.25em] text-white hover:bg-white hover:text-black transition-all"
+                      >
+                        Menu
+                      </Link>
+                      <button
+                        onClick={() => add({
+                          id: item.id,
+                          slug: item.slug,
+                          name: item.name,
+                          price: Number(item.price),
+                        })}
+                        className="rounded-full bg-gold px-6 py-2.5 text-[9px] font-bold uppercase tracking-[0.25em] text-black hover:bg-ember hover:text-white transition-all"
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
-                  {item.description}
-                </p>
-                <button
-                  onClick={() => {
-                    add({
-                      id: item.id,
-                      slug: item.slug,
-                      name: item.name,
-                      price: Number(item.price),
-                    });
-                    toast.success(`Added ${item.name}`);
-                  }}
-                  className="mt-5 self-start rounded-full border border-terracotta px-4 py-1.5 text-xs uppercase tracking-[0.2em] text-terracotta transition-colors hover:bg-terracotta hover:text-primary-foreground"
-                >
-                  Add to cart
-                </button>
               </div>
-            </article>
-          ))}
+            ))}
+          </div>
         </div>
 
-        <div className="mt-12 text-center">
+        <div className="mt-20 text-center">
           <Link
             to="/menu"
             className="inline-flex items-center gap-2 rounded-full border border-foreground/30 px-7 py-3 text-sm uppercase tracking-[0.22em] transition-colors hover:border-terracotta hover:text-terracotta"

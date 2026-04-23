@@ -317,39 +317,38 @@ function HomePage() {
               </div>
             </div>
 
-            {/* Auto-sliding floating card */}
+            {/* Auto-sliding floating glass card */}
             <Link
               to="/menu"
-              className={`absolute -left-12 bottom-20 z-40 block overflow-hidden rounded-3xl border border-white/20 bg-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.2)] backdrop-blur-2xl transition-all duration-800 ease-[cubic-bezier(0.23,1,0.32,1)] min-w-[320px] hover:scale-105 hover:bg-white/20 ${
+              className={`absolute -left-12 bottom-20 z-40 block overflow-hidden rounded-3xl border border-white/10 bg-black/40 shadow-[0_20px_50px_rgba(0,0,0,0.25)] backdrop-blur-2xl transition-all duration-800 ease-[cubic-bezier(0.23,1,0.32,1)] min-w-[320px] hover:scale-105 hover:border-gold/30 hover:bg-black/50 ${
                 cardVisible
                   ? "-rotate-3 translate-y-0 scale-100 opacity-100"
                   : "rotate-0 translate-y-7.5 scale-90 opacity-0"
               }`}
             >
-              <div className="px-7 py-6">
+              <div className="px-7 py-5">
                 <div className="overflow-hidden">
                   <p
-                    className={`font-display text-lg tracking-wide text-white leading-tight transition-all duration-500 ${
+                    className={`font-script text-xl text-gold leading-tight transition-all duration-500 ${
                       cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3.75"
                     }`}
                   >
-                    {heroSlides[activeSlide].title.main}{" "}
-                    <span className="font-script text-gold text-2xl">{heroSlides[activeSlide].title.accent}</span>
+                    &ldquo;{heroSlides[activeSlide].caption}&rdquo;
                   </p>
                 </div>
-                <div className="overflow-hidden mt-2">
-                  <div
-                    className={`flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] text-gold/90 transition-all duration-500 delay-100 ${
+                <div className="overflow-hidden">
+                  <p
+                    className={`mt-1.5 text-[9px] uppercase tracking-[0.2em] text-white/70 font-medium transition-all duration-500 delay-100 ${
                       cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2.5"
                     }`}
                   >
-                    Order Now <span aria-hidden className="text-lg">→</span>
-                  </div>
+                    — {heroSlides[activeSlide].label}
+                  </p>
                 </div>
               </div>
-              <div className="relative h-1 w-full bg-white/5">
+              <div className="relative h-0.5 w-full bg-white/10">
                 <div
-                  className={`absolute inset-0 bg-gold ${
+                  className={`absolute inset-0 bg-gold/80 ${
                     cardVisible ? "w-full opacity-100 slider-progress-bar" : "w-0 opacity-0 slider-progress-reset"
                   }`}
                   key={activeSlide}

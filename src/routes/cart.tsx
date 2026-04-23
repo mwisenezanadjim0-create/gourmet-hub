@@ -186,48 +186,63 @@ function CartPage() {
           >
             <h2 className="font-display text-2xl">Delivery details</h2>
 
-            <Field label="Full name" required>
+            <Field label="Full name" id="customer_name" required>
               <input
+                id="customer_name"
                 required
                 value={form.customer_name}
                 onChange={(e) => setForm((f) => ({ ...f, customer_name: e.target.value }))}
                 maxLength={100}
+                placeholder="Your full name"
+                title="Full name"
                 className="field-input"
               />
             </Field>
-            <Field label="Phone" required>
+            <Field label="Phone" id="customer_phone" required>
               <input
+                id="customer_phone"
                 required
                 value={form.customer_phone}
                 onChange={(e) => setForm((f) => ({ ...f, customer_phone: e.target.value }))}
                 maxLength={30}
+                placeholder="Your phone number"
+                title="Phone number"
                 className="field-input"
               />
             </Field>
-            <Field label="Email">
+            <Field label="Email" id="customer_email">
               <input
+                id="customer_email"
                 type="email"
                 value={form.customer_email}
                 onChange={(e) => setForm((f) => ({ ...f, customer_email: e.target.value }))}
                 maxLength={200}
+                placeholder="Your email address"
+                title="Email address"
                 className="field-input"
               />
             </Field>
-            <Field label="Delivery address" required>
+            <Field label="Delivery address" id="address" required>
               <input
+                id="address"
                 required
                 value={form.address}
                 onChange={(e) => setForm((f) => ({ ...f, address: e.target.value }))}
                 maxLength={300}
+                placeholder="Full delivery address"
+                title="Delivery address"
                 className="field-input"
               />
             </Field>
-            <Field label="Notes for the kitchen">
+            <Field label="Notes for the kitchen" id="notes">
               <textarea
+                id="notes"
                 rows={3}
                 value={form.notes}
                 onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))}
                 maxLength={500}
+                placeholder="Any special instructions?"
+                title="Notes for the kitchen"
                 className="field-input resize-none"
               />
             </Field>
@@ -276,20 +291,25 @@ function CartPage() {
 
 function Field({
   label,
+  id,
   required,
   children,
 }: {
   label: string;
+  id: string;
   required?: boolean;
   children: React.ReactNode;
 }) {
   return (
-    <label className="block">
-      <span className="mb-1.5 block text-xs uppercase tracking-[0.2em] text-muted-foreground">
+    <div className="block">
+      <label
+        htmlFor={id}
+        className="mb-1.5 block text-xs uppercase tracking-[0.2em] text-muted-foreground"
+      >
         {label} {required && <span className="text-terracotta">*</span>}
-      </span>
+      </label>
       {children}
-    </label>
+    </div>
   );
 }
 

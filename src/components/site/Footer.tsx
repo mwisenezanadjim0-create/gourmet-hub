@@ -65,7 +65,9 @@ export function Footer() {
         </div>
 
         <div>
-          <h3 className="mb-4 text-xs uppercase tracking-[0.25em] text-muted-foreground">Contact</h3>
+          <h3 className="mb-4 text-xs uppercase tracking-[0.25em] text-muted-foreground">
+            Contact
+          </h3>
           <ul className="space-y-3 text-sm">
             <li className="flex items-start gap-2">
               <Phone className="mt-0.5 h-4 w-4 shrink-0 text-terracotta" />
@@ -88,7 +90,9 @@ export function Footer() {
         </div>
 
         <div>
-          <h3 className="mb-4 text-xs uppercase tracking-[0.25em] text-muted-foreground">Explore</h3>
+          <h3 className="mb-4 text-xs uppercase tracking-[0.25em] text-muted-foreground">
+            Explore
+          </h3>
           <ul className="space-y-2 text-sm">
             <li>
               <Link to="/menu" className="hover:text-terracotta">

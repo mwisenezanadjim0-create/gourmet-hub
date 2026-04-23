@@ -1,26 +1,30 @@
 <<<<<<< HEAD
 
 =======
->>>>>>> b1ae631b26e9060913de4a5e15f1688b671f4cbf
+
+> > > > > > > b1ae631b26e9060913de4a5e15f1688b671f4cbf
+
 # Warm Artisan Restaurant Website
 
 A creative, farm-to-table inspired restaurant site with online ordering, payments, and a staff dashboard.
 
 ## Visual Direction
-<<<<<<< HEAD
-=======
 
->>>>>>> b1ae631b26e9060913de4a5e15f1688b671f4cbf
+# <<<<<<< HEAD
+
+> > > > > > > b1ae631b26e9060913de4a5e15f1688b671f4cbf
+
 - **Palette**: terracotta, cream, deep olive, charcoal, warm gold accents
 - **Typography**: elegant serif display (e.g., Fraunces) for headings + handwritten accent font for flourishes + clean sans for body
 - **Feel**: textured paper backgrounds, organic blob shapes, hand-drawn dividers, generous whitespace, asymmetric editorial layouts, subtle grain, gentle scroll reveals
 - **Imagery**: rich, moody food photography (AI-generated) with soft natural light
 
 ## Pages / Routes
-<<<<<<< HEAD
-=======
 
->>>>>>> b1ae631b26e9060913de4a5e15f1688b671f4cbf
+# <<<<<<< HEAD
+
+> > > > > > > b1ae631b26e9060913de4a5e15f1688b671f4cbf
+
 1. **Home (`/`)** — Hero with signature dish, "our story" teaser, featured menu items, testimonials strip, CTA to order
 2. **Menu (`/menu`)** — Full menu by category (Starters, Mains, Desserts, Drinks), each dish with its own generated image, price, description, and "Add to cart" button
 3. **About (`/about`)** — Restaurant story, gallery grid of restaurant interior/kitchen/chef photos
@@ -30,28 +34,31 @@ A creative, farm-to-table inspired restaurant site with online ordering, payment
 7. **Staff Dashboard (`/staff`)** — Protected live list of orders with status controls: New → Preparing → Ready → Delivered. Filters by status, shows customer info, items, total, timestamp
 
 ## Shared UI
-<<<<<<< HEAD
-=======
 
->>>>>>> b1ae631b26e9060913de4a5e15f1688b671f4cbf
+# <<<<<<< HEAD
+
+> > > > > > > b1ae631b26e9060913de4a5e15f1688b671f4cbf
+
 - **Header**: restaurant logo (wordmark), nav (Home / Menu / About / Order), cart icon with item count
 - **Footer**: owner name, phone number, email, address, hours, social icons, copyright
 
 ## Ordering & Payment Flow
-<<<<<<< HEAD
-=======
 
->>>>>>> b1ae631b26e9060913de4a5e15f1688b671f4cbf
+# <<<<<<< HEAD
+
+> > > > > > > b1ae631b26e9060913de4a5e15f1688b671f4cbf
+
 - Cart state persisted in localStorage
 - Checkout triggers Stripe-hosted payment (Lovable built-in Stripe Payments, no account needed)
 - On successful payment webhook → order saved to DB with status "new"
 - Customer gets confirmation page; staff dashboard shows it live
 
 ## Employee Dashboard
-<<<<<<< HEAD
-=======
 
->>>>>>> b1ae631b26e9060913de4a5e15f1688b671f4cbf
+# <<<<<<< HEAD
+
+> > > > > > > b1ae631b26e9060913de4a5e15f1688b671f4cbf
+
 - Login via Lovable Cloud auth (email/password)
 - Role-based access: only users with `staff` role can view/update orders (roles stored in separate `user_roles` table for security)
 - Live-updating orders list (polling or realtime)
@@ -59,30 +66,33 @@ A creative, farm-to-table inspired restaurant site with online ordering, payment
 - Seeded with one demo staff account you can log in with
 
 ## Data Model (Lovable Cloud)
-<<<<<<< HEAD
-=======
 
->>>>>>> b1ae631b26e9060913de4a5e15f1688b671f4cbf
+# <<<<<<< HEAD
+
+> > > > > > > b1ae631b26e9060913de4a5e15f1688b671f4cbf
+
 - `menu_items` — name, description, price, category, image_url, available
 - `orders` — customer name, phone, address, notes, items (JSON), total, status, stripe_session_id, created_at
 - `profiles` + `user_roles` (app_role enum: 'staff', 'admin') with `has_role()` security-definer function
 - RLS: public read on menu; orders insert via server function after payment; only staff can read/update orders
 
 ## Placeholder Content
-<<<<<<< HEAD
-=======
 
->>>>>>> b1ae631b26e9060913de4a5e15f1688b671f4cbf
+# <<<<<<< HEAD
+
+> > > > > > > b1ae631b26e9060913de4a5e15f1688b671f4cbf
+
 - Invented restaurant: **"Olea & Ember"** — rustic Mediterranean
 - ~10 menu items across 4 categories, each with AI-generated food imagery
 - 6 about-page interior/kitchen photos
 - Sample owner contact in footer
 
 ## Setup Needed After Plan Approval
-<<<<<<< HEAD
-=======
 
->>>>>>> b1ae631b26e9060913de4a5e15f1688b671f4cbf
+# <<<<<<< HEAD
+
+> > > > > > > b1ae631b26e9060913de4a5e15f1688b671f4cbf
+
 - Enable Lovable Cloud (database + auth)
 - Enable Lovable's built-in Stripe Payments (test mode instantly, no account required)
 - Generate food and restaurant imagery

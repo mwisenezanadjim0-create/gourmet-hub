@@ -169,8 +169,8 @@ function HomePage() {
         .from("menu_items")
         .select("*")
         .eq("available", true)
-        .in("slug", ["burrata", "pappardelle", "branzino", "oliveoilcake"])
-        .order("sort_order");
+        .order("sort_order")
+        .limit(8);
       if (error) throw error;
       return data ?? [];
     },
@@ -205,8 +205,7 @@ function HomePage() {
         </div>
 
         {/* ─── Main content grid ─── */}
-        <div className="relative z-10 mx-auto flex w-full max-w-[1600px] flex-col gap-10 px-0 pb-24 pt-24 md:grid md:grid-cols-[0.6fr_1.4fr] md:gap-16 md:px-12">
-
+        <div className="relative z-10 mx-auto flex w-full max-w-400 flex-col gap-10 px-0 pb-24 pt-24 md:grid md:grid-cols-[0.6fr_1.4fr] md:gap-16 md:px-12">
           {/* Text content */}
           <div className="relative z-30 mx-6 flex flex-col justify-center rounded-[2.5rem] border border-white/10 bg-[#1a0f0a]/40 p-8 shadow-2xl backdrop-blur-xl md:mx-0 md:rounded-none md:border-none md:bg-transparent md:p-0 md:shadow-none md:backdrop-blur-none">
             <span className="mb-6 inline-flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.4em] text-gold/80 md:text-sm md:text-gold">
@@ -219,9 +218,13 @@ function HomePage() {
                 }`}
               >
                 {heroSlides[activeSlide].title.main}{" "}
-                <span className="font-script text-5xl text-gold md:text-7xl">{heroSlides[activeSlide].title.accent}</span>
+                <span className="font-script text-5xl text-gold md:text-7xl">
+                  {heroSlides[activeSlide].title.accent}
+                </span>
                 <br />
-                <span className="font-script text-4xl text-gold md:text-6xl">{heroSlides[activeSlide].title.script}</span>
+                <span className="font-script text-4xl text-gold md:text-6xl">
+                  {heroSlides[activeSlide].title.script}
+                </span>
               </h1>
             </div>
             <div className="overflow-hidden">
@@ -256,7 +259,7 @@ function HomePage() {
             <div className="absolute -bottom-10 left-8 h-64 w-64 rounded-full bg-terracotta/25 blur-3xl" />
 
             {/* Image slideshow */}
-            <div className="relative aspect-[3/2] overflow-hidden rounded-[2.5rem] border border-border/40 bg-muted shadow-2xl shadow-foreground/5">
+            <div className="relative aspect-3/2 overflow-hidden rounded-[2.5rem] border border-border/40 bg-muted shadow-2xl shadow-foreground/5">
               {heroSlides.map((slide, i) => (
                 <div
                   key={i}
@@ -282,14 +285,20 @@ function HomePage() {
               {/* Navigation arrows (desktop) */}
               <div className="absolute inset-x-4 top-1/2 z-30 flex -translate-y-1/2 justify-between pointer-events-none">
                 <button
-                  onClick={(e) => { e.stopPropagation(); prevSlide(); }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    prevSlide();
+                  }}
                   className="group pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-black/10 text-white/70 backdrop-blur-sm transition-all hover:border-gold hover:bg-black/30 hover:text-gold"
                   aria-label="Previous slide"
                 >
                   <ChevronLeft className="h-6 w-6 transition-transform group-hover:-translate-x-0.5" />
                 </button>
                 <button
-                  onClick={(e) => { e.stopPropagation(); nextSlide(); }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    nextSlide();
+                  }}
                   className="group pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-black/10 text-white/70 backdrop-blur-sm transition-all hover:border-gold hover:bg-black/30 hover:text-gold"
                   aria-label="Next slide"
                 >
@@ -320,7 +329,7 @@ function HomePage() {
             {/* Auto-sliding floating glass card */}
             <Link
               to="/menu"
-              className={`absolute -left-12 bottom-20 z-40 block overflow-hidden rounded-3xl border border-white/10 bg-black/40 shadow-[0_20px_50px_rgba(0,0,0,0.25)] backdrop-blur-2xl transition-all duration-800 ease-[cubic-bezier(0.23,1,0.32,1)] min-w-[320px] hover:scale-105 hover:border-gold/30 hover:bg-black/50 ${
+              className={`absolute -left-12 bottom-20 z-40 block overflow-hidden rounded-3xl border border-white/10 bg-[#1a0f0a]/60 shadow-[0_20px_50px_rgba(0,0,0,0.3)] backdrop-blur-3xl transition-all duration-800 ease-[cubic-bezier(0.23,1,0.32,1)] min-w-[320px] hover:scale-105 hover:border-gold/30 hover:bg-[#1a0f0a]/80 ${
                 cardVisible
                   ? "-rotate-3 translate-y-0 scale-100 opacity-100"
                   : "rotate-0 translate-y-7.5 scale-90 opacity-0"
@@ -349,7 +358,9 @@ function HomePage() {
               <div className="relative h-0.5 w-full bg-white/10">
                 <div
                   className={`absolute inset-0 bg-gold/80 ${
-                    cardVisible ? "w-full opacity-100 slider-progress-bar" : "w-0 opacity-0 slider-progress-reset"
+                    cardVisible
+                      ? "w-full opacity-100 slider-progress-bar"
+                      : "w-0 opacity-0 slider-progress-reset"
                   }`}
                   key={activeSlide}
                 />
@@ -392,6 +403,7 @@ function HomePage() {
             </Link>
           </div>
         </div>
+      </section>
 
       {/* FEATURED DISHES: 3D CURVED SLIDER */}
       <section className="reveal-on-scroll relative overflow-hidden py-20">
@@ -403,59 +415,76 @@ function HomePage() {
           <div className="divider-organic mt-6" />
         </div>
 
-        <div className="banner-3d mt-14">
-          <div
-            className="slider-3d"
-            style={{ "--quantity": featured?.length || 0 } as React.CSSProperties}
-          >
-            {featured?.map((item, idx) => (
-              <div
-                key={item.id}
-                className="item-3d group"
-                style={{ "--position": idx + 1 } as React.CSSProperties}
-              >
-                <div className="relative h-full w-full overflow-hidden rounded-[2rem] border border-white/10 shadow-2xl transition-all duration-500 group-hover:scale-105 group-hover:border-gold/30">
-                  {imageForSlug(item.slug) ? (
-                    <img
-                      src={imageForSlug(item.slug)}
-                      alt={item.name}
-                      className="h-full w-full object-cover"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <div className="h-full w-full bg-muted" />
-                  )}
+        {!featured ? (
+          <div className="flex h-187.5 items-center justify-center">
+            <div className="flex flex-col items-center gap-4">
+              <div className="h-12 w-12 animate-spin rounded-full border-2 border-gold/20 border-t-gold" />
+              <p className="font-display text-sm uppercase tracking-widest text-gold/60">
+                Stoking the fire...
+              </p>
+            </div>
+          </div>
+        ) : (
+          <div className="banner-3d -mt-6">
+            <div
+              className="slider-3d"
+              style={{ "--quantity": featured?.length || 0 } as React.CSSProperties}
+            >
+              {featured?.map((item, idx) => (
+                <div
+                  key={item.id}
+                  className="item-3d group"
+                  style={{ "--position": idx + 1 } as React.CSSProperties}
+                >
+                  <div className="card-inner relative h-full w-full overflow-hidden rounded-[2rem] border border-white/10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)] transition-all duration-500 group-hover:border-gold/30 group-hover:shadow-gold/10">
+                    {imageForSlug(item.slug) ? (
+                      <img
+                        src={imageForSlug(item.slug)}
+                        alt={item.name}
+                        className="h-full w-full object-cover"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="h-full w-full bg-muted" />
+                    )}
 
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[#1a0f0a]/80 opacity-0 backdrop-blur-[2px] transition-all duration-500 group-hover:opacity-100">
-                    <p className="px-4 text-center font-display text-lg text-white">
-                      {item.name}
-                    </p>
-                    <div className="flex flex-col gap-2">
-                      <Link
-                        to="/menu"
-                        className="rounded-full bg-white/10 border border-white/20 px-6 py-2.5 text-[9px] font-bold uppercase tracking-[0.25em] text-white hover:bg-white hover:text-black transition-all"
-                      >
-                        Menu
-                      </Link>
-                      <button
-                        onClick={() => add({
-                          id: item.id,
-                          slug: item.slug,
-                          name: item.name,
-                          price: Number(item.price),
-                        })}
-                        className="rounded-full bg-gold px-6 py-2.5 text-[9px] font-bold uppercase tracking-[0.25em] text-black hover:bg-ember hover:text-white transition-all"
-                      >
-                        Add to Cart
-                      </button>
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-[#1a0f0a]/90 subpixel-antialiased opacity-0 transition-all duration-500 group-hover:opacity-100">
+                      <h3 className="text-shadow-luxe px-6 text-center font-display text-2xl font-medium tracking-wide text-gold">
+                        {item.name}
+                      </h3>
+                      <p className="mb-2 font-display text-sm tracking-[0.2em] text-white/90">
+                        {Number(item.price).toLocaleString()} frw
+                      </p>
+                      <div className="flex flex-col gap-3">
+                        <Link
+                          to="/menu"
+                          className="flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-8 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-white transition-all hover:bg-white hover:text-black"
+                        >
+                          Discover
+                        </Link>
+                        <button
+                          onClick={() => {
+                            add({
+                              id: item.id,
+                              slug: item.slug,
+                              name: item.name,
+                              price: Number(item.price),
+                            });
+                            toast.success(`Added ${item.name} to your table`);
+                          }}
+                          className="flex items-center justify-center rounded-full bg-gold px-8 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-black transition-all hover:bg-ember hover:text-white"
+                        >
+                          Add to Table
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="mt-20 text-center">
           <Link

@@ -3,7 +3,9 @@
 Welcome to the official repository for the Aslan Cafe Luxe & Resto platform in Kigali.
 
 ## ✨ Luxury Branding Rules
+
 To maintain the high-end feel of the brand, please follow these design rules:
+
 - **The 3-Second Rule**: All global transitions are set to 3000ms.
 - **Palette**: Use the custom CSS variables:
   - `--gold`: Premium accent color.
@@ -12,6 +14,7 @@ To maintain the high-end feel of the brand, please follow these design rules:
 - **Logo**: Use `/aslanlogo.png` for all branding.
 
 ## 🚀 Quick Start
+
 1. **Install Dependencies**:
    ```bash
    npm install
@@ -26,13 +29,16 @@ To maintain the high-end feel of the brand, please follow these design rules:
    ```
 
 ## 🤝 Collaborative Workflow
+
 To work together effectively:
+
 1. **Pull before you start**: Always run `git pull origin main` before you start working to get the latest changes from your teammate.
 2. **Commit often**: Use clear messages like `feat: add new dessert menu item`.
 3. **Push your work**: Run `git push origin main` when you finish a task.
 4. **Handle Conflicts**: If you both edit the same file, Git will ask you to resolve the "Merge Conflict". Look for the `<<<< HEAD` markers in your code.
 
 ## 📁 Project Structure
+
 - `src/routes`: Pages and routing (TanStack Router).
 - `src/components`: Reusable UI elements.
 - `public/`: Static assets like the logo.

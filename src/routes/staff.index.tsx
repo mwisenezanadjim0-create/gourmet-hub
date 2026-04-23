@@ -115,7 +115,8 @@ function StaffDashboard() {
     navigate({ to: "/staff/login" });
   }
 
-  if (authed === null) return <div className="p-10 text-center text-muted-foreground">Loading…</div>;
+  if (authed === null)
+    return <div className="p-10 text-center text-muted-foreground">Loading…</div>;
 
   if (authed && isStaff === false) {
     return (

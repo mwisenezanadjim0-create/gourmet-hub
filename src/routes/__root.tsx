@@ -41,7 +41,10 @@ export const Route = createRootRoute({
       },
       { name: "author", content: "Aslan Cafe Luxe & Resto" },
       { property: "og:title", content: "Aslan Cafe Luxe & Resto — Luxury Dining" },
-      { property: "og:description", content: "Luxury dining, gourmet flavors, and exceptional service." },
+      {
+        property: "og:description",
+        content: "Luxury dining, gourmet flavors, and exceptional service.",
+      },
       { property: "og:type", content: "restaurant" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -75,7 +78,9 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  const [queryClient] = useState(() => new QueryClient({ defaultOptions: { queries: { staleTime: 30_000 } } }));
+  const [queryClient] = useState(
+    () => new QueryClient({ defaultOptions: { queries: { staleTime: 30_000 } } }),
+  );
   return (
     <QueryClientProvider client={queryClient}>
       <CartProvider>

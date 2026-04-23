@@ -236,11 +236,15 @@ nav a,
 .reveal-delay-400 {
   transition-delay: 400ms !important;
 }
-.reveal-delay-500 { transition-delay: 500ms !important; }
+.reveal-delay-500 {
+  transition-delay: 500ms !important;
+}
 
 /* Hero Slider Progress Bar */
 .slider-progress-bar {
-  transition: width 10000ms linear, opacity 500ms ease-out;
+  transition:
+    width 10000ms linear,
+    opacity 500ms ease-out;
 }
 
 .slider-progress-reset {
@@ -250,7 +254,7 @@ nav a,
 /* 3D Curved Slider */
 .banner-3d {
   width: 100%;
-  height: 550px;
+  height: 650px;
   text-align: center;
   overflow: hidden;
   position: relative;
@@ -265,8 +269,35 @@ nav a,
   width: 240px;
   height: 320px;
   transform-style: preserve-3d;
-  animation: autoRun 80s linear infinite;
+  animation: autoRun 50s linear infinite;
   z-index: 10;
+}
+
+.text-shadow-luxe {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(-2deg);
+  }
+  40% {
+    transform: rotate(2deg);
+  }
+  60% {
+    transform: rotate(-1deg);
+  }
+  80% {
+    transform: rotate(1deg);
+  }
+}
+
+.banner-3d .slider-3d .item-3d:hover .card-inner {
+  animation: shake 0.9s ease-in-out;
 }
 
 @keyframes autoRun {
@@ -281,21 +312,27 @@ nav a,
 .banner-3d .slider-3d .item-3d {
   position: absolute;
   inset: 0 0 0 0;
-  transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(500px);
+  transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(550px);
   transition: transform 0.5s ease;
 }
 
-.banner-3d .slider-3d:hover {
+.banner-3d .slider-3d:has(.item-3d:hover) {
   animation-play-state: paused;
+}
+
+.banner-3d .slider-3d .item-3d:hover {
+  transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(650px);
+  z-index: 100;
 }
 
 /* Responsive adjustments for 3D radius */
 @media (max-width: 768px) {
   .banner-3d .slider-3d .item-3d {
-    transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(320px);
+    transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+      translateZ(400px);
   }
   .banner-3d .slider-3d {
-    width: 160px;
-    height: 220px;
+    width: 200px;
+    height: 280px;
   }
 }

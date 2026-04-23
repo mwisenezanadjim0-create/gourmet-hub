@@ -56,7 +56,7 @@ function AboutPage() {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     document.querySelectorAll(".reveal-on-scroll").forEach((el) => observer.observe(el));

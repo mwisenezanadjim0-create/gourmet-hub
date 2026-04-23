@@ -220,27 +220,27 @@ function HomePage() {
 
             {/* Main hero image — sliding slideshow */}
             <div className="relative aspect-square overflow-hidden rounded-[3rem] border border-border/40 bg-muted shadow-2xl shadow-foreground/5">
-              <div
-                className="flex h-full w-full transition-transform duration-1200 ease-[cubic-bezier(0.23,1,0.32,1)]"
-                style={{ transform: `translateX(-${activeSlide * 100}%)` }}
-              >
-                {heroSlides.map((slide, i) => (
-                  <div key={i} className="relative h-full w-full shrink-0">
-                    <img
-                      src={slide.src}
-                      alt={slide.alt}
-                      width={1600}
-                      height={1600}
-                      className="h-full w-full object-cover transition-transform duration-1200"
-                      style={{
-                        transform: activeSlide === i ? "scale(1)" : "scale(1.1)",
-                      }}
-                    />
-                    {/* Subtle vignette for premium feel */}
-                    <div className="absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-black/10 pointer-events-none" />
-                  </div>
-                ))}
-              </div>
+              {heroSlides.map((slide, i) => (
+                <div
+                  key={i}
+                  className="absolute inset-0 h-full w-full transition-all duration-1200 ease-[cubic-bezier(0.23,1,0.32,1)]"
+                  style={{
+                    opacity: activeSlide === i ? 1 : 0,
+                    zIndex: activeSlide === i ? 20 : 10,
+                    transform: activeSlide === i ? "scale(1)" : "scale(1.1)",
+                    pointerEvents: activeSlide === i ? "auto" : "none",
+                  }}
+                >
+                  <img
+                    src={slide.src}
+                    alt={slide.alt}
+                    width={1600}
+                    height={1600}
+                    className="h-full w-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-black/10 pointer-events-none" />
+                </div>
+              ))}
 
               {/* Slide progress dots */}
               <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 gap-2">

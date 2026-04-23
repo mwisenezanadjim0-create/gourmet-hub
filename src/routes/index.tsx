@@ -180,69 +180,19 @@ function HomePage() {
     <SiteLayout>
       {/* HERO */}
       <section
-        className="relative flex min-h-screen items-center overflow-hidden"
+        className="relative flex min-h-screen items-center overflow-hidden bg-[#f4ece4]"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
-        {/* ─── Mobile: full-bleed background image (hidden on md+) ─── */}
-        <div className="absolute inset-0 z-0 overflow-hidden md:hidden">
-          {heroSlides.map((slide, i) => (
-            <div
-              key={i}
-              className={`absolute inset-0 h-full w-full transition-all duration-1200 ease-[cubic-bezier(0.23,1,0.32,1)] ${
-                activeSlide === i
-                  ? "opacity-100 z-20 scale-100 pointer-events-auto"
-                  : "opacity-0 z-10 scale-110 pointer-events-none"
-              }`}
-            >
-              <img
-                src={slide.src}
-                alt={slide.alt}
-                width={1600}
-                height={1600}
-                loading="eager"
-                fetchPriority="high"
-                className="h-full w-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black/40 pointer-events-none" />
-            </div>
-          ))}
-
-          {/* Navigation arrows (mobile) */}
-          <div className="absolute inset-x-4 top-1/2 z-30 flex -translate-y-1/2 justify-between pointer-events-none">
-            <button
-              onClick={(e) => { e.stopPropagation(); prevSlide(); }}
-              className="group pointer-events-auto flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/10 text-white/70 backdrop-blur-sm transition-all hover:border-gold hover:bg-black/30 hover:text-gold"
-              aria-label="Previous slide"
-            >
-              <ChevronLeft className="h-5 w-5" />
-            </button>
-            <button
-              onClick={(e) => { e.stopPropagation(); nextSlide(); }}
-              className="group pointer-events-auto flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/10 text-white/70 backdrop-blur-sm transition-all hover:border-gold hover:bg-black/30 hover:text-gold"
-              aria-label="Next slide"
-            >
-              <ChevronRight className="h-5 w-5" />
-            </button>
-          </div>
-
-          {/* Progress dots (mobile) */}
-          <div className="absolute bottom-6 left-1/2 z-30 flex -translate-x-1/2 gap-2">
-            {heroSlides.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => goToSlide(i)}
-                aria-label={`Go to slide ${i + 1}`}
-                className="group relative h-2 p-1 focus:outline-none"
-              >
-                <div
-                  className={`h-1.5 rounded-full transition-all duration-500 ${
-                    i === activeSlide ? "w-10 bg-gold" : "w-2 bg-white/40"
-                  }`}
-                />
-              </button>
-            ))}
-          </div>
+        {/* ─── Blurred Atmospheric Background ─── */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/hero-cinematic.png"
+            alt=""
+            className="h-full w-full object-cover blur-[60px] scale-110 opacity-40 brightness-110"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-linear-to-b from-[#f4ece4]/20 via-transparent to-[#f4ece4]/40" />
         </div>
 
         {/* ─── Main content grid ─── */}
@@ -290,7 +240,7 @@ function HomePage() {
             </div>
           </div>
 
-          {/* ─── Desktop: image column (hidden on mobile) ─── */}
+          {/* ─── Desktop: image column (restored slider) ─── */}
           <div className="relative hidden md:block">
             {/* Glow orbs */}
             <div className="absolute -right-10 -top-10 h-72 w-72 rounded-full bg-gold/25 blur-3xl" />

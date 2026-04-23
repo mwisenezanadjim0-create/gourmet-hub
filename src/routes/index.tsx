@@ -255,14 +255,14 @@ function HomePage() {
             </span>
             <div className="overflow-hidden">
               <h1
-                className={`font-display text-4xl leading-[1.1] text-white transition-all duration-800 ease-out md:text-8xl md:leading-[1.02] md:text-foreground ${
+                className={`font-display text-3xl leading-[1.1] text-white transition-all duration-800 ease-out md:text-6xl md:leading-[1.05] md:text-foreground ${
                   cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7.5"
                 }`}
               >
                 {heroSlides[activeSlide].title.main}{" "}
-                <span className="font-script text-5xl text-gold md:text-9xl">{heroSlides[activeSlide].title.accent}</span>
+                <span className="font-script text-5xl text-gold md:text-7xl">{heroSlides[activeSlide].title.accent}</span>
                 <br />
-                <span className="font-script text-4xl text-gold md:text-8xl">{heroSlides[activeSlide].title.script}</span>
+                <span className="font-script text-4xl text-gold md:text-6xl">{heroSlides[activeSlide].title.script}</span>
               </h1>
             </div>
             <div className="overflow-hidden">

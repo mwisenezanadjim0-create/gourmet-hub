@@ -12,10 +12,10 @@ export function Header() {
   const { count } = useCart();
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-[#1a0f0a]/10 backdrop-blur-xl">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
         <Link to="/" className="group flex items-center gap-3 leading-none">
-          <div className="relative h-12 w-12 overflow-hidden rounded-full border-2 border-gold shadow-lg transition-transform group-hover:scale-110">
+          <div className="relative h-11 w-11 overflow-hidden rounded-full border border-gold/40 shadow-lg transition-transform group-hover:scale-105">
             <img
               src="/aslanlogo.png"
               alt="Aslan Cafe Logo"
@@ -26,8 +26,8 @@ export function Header() {
             />
           </div>
           <div className="flex flex-col">
-            <span className="font-script text-2xl text-gold">Aslan Cafe</span>
-            <span className="-mt-1 font-sans text-[10px] font-medium tracking-[0.45em] text-foreground/60 uppercase">
+            <span className="font-script text-xl text-gold">Aslan Cafe</span>
+            <span className="-mt-1 font-sans text-[9px] font-medium tracking-[0.4em] text-white/60 uppercase">
               Luxe &amp; Resto
             </span>
           </div>
@@ -40,29 +40,29 @@ export function Header() {
               to={link.to}
               activeOptions={{ exact: link.exact }}
               activeProps={{ className: "text-gold" }}
-              inactiveProps={{ className: "text-foreground/80 hover:text-gold" }}
-              className="relative text-sm uppercase tracking-[0.22em] transition-colors"
+              inactiveProps={{ className: "text-white/80 hover:text-gold" }}
+              className="relative text-[11px] font-bold uppercase tracking-[0.25em] transition-colors"
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
           <Link
             to="/menu"
-            className="hidden rounded-full border border-gold px-5 py-2 text-xs uppercase tracking-[0.22em] text-gold transition-colors hover:bg-gold hover:text-primary-foreground sm:inline-block"
+            className="hidden rounded-full border border-gold/40 bg-gold/5 px-6 py-2.5 text-[10px] font-bold uppercase tracking-[0.25em] text-gold transition-all hover:bg-gold hover:text-black sm:inline-block"
           >
             Order Now
           </Link>
           <Link
             to="/cart"
             aria-label="View cart"
-            className="relative inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:border-gold hover:text-gold"
+            className="relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-all hover:border-gold/50 hover:text-gold"
           >
-            <ShoppingBag className="h-5 w-5" />
+            <ShoppingBag className="h-4 w-4" />
             {count > 0 && (
-              <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-gold px-1 text-[10px] font-semibold text-primary-foreground">
+              <span className="absolute -right-1 -top-1 flex h-4.5 min-w-4.5 items-center justify-center rounded-full bg-gold px-1 text-[9px] font-bold text-black">
                 {count}
               </span>
             )}

@@ -13,7 +13,8 @@ type Status = Database["public"]["Enums"]["order_status"];
 export const Route = createFileRoute("/staff/")({
   head: () => ({
     meta: [
-      { title: "Orders — Staff Dashboard" },
+      { title: "Your Order — Aslan Cafe Luxe & Resto" },
+      { property: "og:title", content: "Your Order — Aslan Cafe Luxe & Resto" },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -139,7 +140,7 @@ function StaffDashboard() {
       <header className="border-b border-border/60 bg-card/70 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
           <div>
-            <span className="font-script text-2xl text-terracotta">Olea & Ember</span>
+            <span className="font-script text-2xl text-terracotta">Aslan Cafe Luxe & Resto</span>
             <h1 className="font-display text-xl leading-tight">Orders Dashboard</h1>
           </div>
           <div className="flex items-center gap-2">

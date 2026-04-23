@@ -12,8 +12,8 @@ import { useServerFn } from "@tanstack/react-start";
 export const Route = createFileRoute("/cart")({
   head: () => ({
     meta: [
-      { title: "Your Order — Olea & Ember" },
-      { name: "description", content: "Review your order and check out." },
+      { title: "Your Order — Aslan Cafe Luxe & Resto" },
+      { property: "og:title", content: "Your Order — Aslan Cafe Luxe & Resto" },
     ],
   }),
   component: CartPage,

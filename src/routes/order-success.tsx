@@ -10,7 +10,7 @@ export const Route = createFileRoute("/order-success")({
       .parse(search),
   head: () => ({
     meta: [
-      { title: "Order Confirmed — Olea & Ember" },
+      { title: "Order Confirmed — Aslan Cafe Luxe & Resto" },
       { name: "description", content: "Thank you — your order is in." },
     ],
   }),

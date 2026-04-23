@@ -2,13 +2,8 @@
 // Server-side Supabase client with service role key - bypasses RLS.
 // Use this for admin operations in server functions and server routes only.
 // For user-authenticated queries (with RLS), use the auth middleware instead.
-<<<<<<< HEAD
-import { createClient } from '@supabase/supabase-js';
-import type { Database } from './types';
-=======
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "./types";
->>>>>>> b1ae631b26e9060913de4a5e15f1688b671f4cbf
 
 function createSupabaseAdminClient() {
   const SUPABASE_URL = process.env.SUPABASE_URL;
@@ -16,11 +11,7 @@ function createSupabaseAdminClient() {
 
   if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
     throw new Error(
-<<<<<<< HEAD
-      'Missing Supabase server environment variables. Ensure SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are set.'
-=======
       "Missing Supabase server environment variables. Ensure SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are set.",
->>>>>>> b1ae631b26e9060913de4a5e15f1688b671f4cbf
     );
   }
 
@@ -29,11 +20,7 @@ function createSupabaseAdminClient() {
       storage: undefined,
       persistSession: false,
       autoRefreshToken: false,
-<<<<<<< HEAD
-    }
-=======
     },
->>>>>>> b1ae631b26e9060913de4a5e15f1688b671f4cbf
   });
 }
 

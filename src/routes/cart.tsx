@@ -59,16 +59,12 @@ function CartPage() {
       const res = await checkoutFn({
         data: {
           customer: parsed.data,
-<<<<<<< HEAD
-          items: items.map((i) => ({ id: i.id, name: i.name, price: i.price, quantity: i.quantity })),
-=======
           items: items.map((i) => ({
             id: i.id,
             name: i.name,
             price: i.price,
             quantity: i.quantity,
           })),
->>>>>>> b1ae631b26e9060913de4a5e15f1688b671f4cbf
         },
       });
       if (res.checkoutUrl) {
@@ -117,9 +113,6 @@ function CartPage() {
               >
                 <div className="aspect-square w-24 overflow-hidden rounded-xl sm:w-28">
                   {imageForSlug(item.slug) ? (
-<<<<<<< HEAD
-                    <img src={imageForSlug(item.slug)} alt={item.name} className="h-full w-full object-cover" width={200} height={200} />
-=======
                     <img
                       src={imageForSlug(item.slug)}
                       alt={item.name}
@@ -127,7 +120,6 @@ function CartPage() {
                       width={200}
                       height={200}
                     />
->>>>>>> b1ae631b26e9060913de4a5e15f1688b671f4cbf
                   ) : (
                     <div className="h-full w-full bg-muted" />
                   )}
@@ -135,15 +127,11 @@ function CartPage() {
                 <div className="flex min-w-0 flex-1 flex-col">
                   <div className="flex items-start justify-between gap-3">
                     <h3 className="font-display text-lg">{item.name}</h3>
-<<<<<<< HEAD
-                    <button onClick={() => remove(item.id)} aria-label="Remove" className="text-muted-foreground hover:text-destructive">
-=======
                     <button
                       onClick={() => remove(item.id)}
                       aria-label="Remove"
                       className="text-muted-foreground hover:text-destructive"
                     >
->>>>>>> b1ae631b26e9060913de4a5e15f1688b671f4cbf
                       <Trash2 className="h-4 w-4" />
                     </button>
                   </div>
@@ -166,13 +154,9 @@ function CartPage() {
                         <Plus className="h-3.5 w-3.5" />
                       </button>
                     </div>
-<<<<<<< HEAD
-                    <span className="font-display text-lg text-terracotta">{formatPrice(item.price * item.quantity)}</span>
-=======
                     <span className="font-display text-lg text-terracotta">
                       {formatPrice(item.price * item.quantity)}
                     </span>
->>>>>>> b1ae631b26e9060913de4a5e15f1688b671f4cbf
                   </div>
                 </div>
               </div>
@@ -233,14 +217,10 @@ function CartPage() {
             </Field>
 
             <div className="space-y-2 border-t border-border pt-5 text-sm">
-<<<<<<< HEAD
-              <Row label={`Subtotal (${count} item${count === 1 ? "" : "s"})`} value={formatPrice(subtotal)} />
-=======
               <Row
                 label={`Subtotal (${count} item${count === 1 ? "" : "s"})`}
                 value={formatPrice(subtotal)}
               />
->>>>>>> b1ae631b26e9060913de4a5e15f1688b671f4cbf
               <Row label="Tax" value={formatPrice(tax)} />
               <Row label="Total" value={formatPrice(total)} bold />
             </div>
@@ -252,13 +232,9 @@ function CartPage() {
             >
               {submitting ? "Processing…" : "Pay & Place Order"}
             </button>
-<<<<<<< HEAD
-            <p className="text-center text-xs text-muted-foreground">Secure checkout · powered by Stripe</p>
-=======
             <p className="text-center text-xs text-muted-foreground">
               Secure checkout · powered by Stripe
             </p>
->>>>>>> b1ae631b26e9060913de4a5e15f1688b671f4cbf
           </form>
         </section>
       )}
@@ -282,9 +258,6 @@ function CartPage() {
   );
 }
 
-<<<<<<< HEAD
-function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
-=======
 function Field({
   label,
   required,
@@ -294,7 +267,6 @@ function Field({
   required?: boolean;
   children: React.ReactNode;
 }) {
->>>>>>> b1ae631b26e9060913de4a5e15f1688b671f4cbf
   return (
     <label className="block">
       <span className="mb-1.5 block text-xs uppercase tracking-[0.2em] text-muted-foreground">
@@ -307,13 +279,9 @@ function Field({
 
 function Row({ label, value, bold }: { label: string; value: string; bold?: boolean }) {
   return (
-<<<<<<< HEAD
-    <div className={`flex justify-between ${bold ? "font-display text-lg text-foreground" : "text-muted-foreground"}`}>
-=======
     <div
       className={`flex justify-between ${bold ? "font-display text-lg text-foreground" : "text-muted-foreground"}`}
     >
->>>>>>> b1ae631b26e9060913de4a5e15f1688b671f4cbf
       <span>{label}</span>
       <span>{value}</span>
     </div>

@@ -164,11 +164,11 @@ function HomePage() {
     <SiteLayout>
       {/* HERO */}
       <section 
-        className="relative overflow-hidden"
+        className="relative overflow-hidden flex items-center min-h-[90vh]"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
-        <div className="mx-auto grid max-w-7xl gap-10 px-6 pb-20 pt-12 md:grid-cols-[1.05fr_1fr] md:gap-16 md:pt-16">
+        <div className="mx-auto grid max-w-7xl w-full gap-10 px-6 pb-24 pt-24 md:grid-cols-[1.1fr_1fr] md:gap-20">
           <div className="relative z-10 flex flex-col justify-center">
             <span className="mb-6 inline-flex items-center gap-2 text-sm uppercase tracking-[0.35em] text-olive">
               <span className="h-px w-10 bg-olive/60" /> Kigali · est. 2024
@@ -183,7 +183,7 @@ function HomePage() {
               >
                 {heroSlides[activeSlide].title.main} <span className="italic text-gold">{heroSlides[activeSlide].title.accent}</span>
                 <br />
-                of <span className="font-script text-6xl text-gold md:text-9xl">{heroSlides[activeSlide].title.script}</span>
+                <span className="font-script text-6xl text-gold md:text-9xl">{heroSlides[activeSlide].title.script}</span>
               </h1>
             </div>
             <div className="overflow-hidden">
@@ -218,8 +218,8 @@ function HomePage() {
             <div className="absolute -right-10 -top-10 h-72 w-72 rounded-full bg-gold/25 blur-3xl" />
             <div className="absolute -bottom-10 left-8 h-64 w-64 rounded-full bg-terracotta/25 blur-3xl" />
 
-            {/* Main hero image — sliding slideshow */}
-            <div className="relative aspect-square overflow-hidden rounded-[3rem] border border-border/40 bg-muted shadow-2xl shadow-foreground/5">
+            {/* Main hero image — cross-fade slideshow */}
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[3.5rem] border border-border/40 bg-muted shadow-2xl shadow-foreground/5 md:scale-105">
               {heroSlides.map((slide, i) => (
                 <div
                   key={i}
@@ -268,17 +268,17 @@ function HomePage() {
 
             {/* Auto-sliding floating card */}
             <div
-              className="absolute -left-4 bottom-12 hidden -rotate-2 overflow-hidden rounded-3xl border border-gold/15 bg-card/90 shadow-2xl backdrop-blur-2xl transition-all duration-800 ease-[cubic-bezier(0.23,1,0.32,1)] md:block"
+              className="absolute -left-12 bottom-20 hidden -rotate-3 overflow-hidden rounded-3xl border border-gold/20 bg-card/95 shadow-[0_20px_50px_rgba(0,0,0,0.15)] backdrop-blur-3xl transition-all duration-800 ease-[cubic-bezier(0.23,1,0.32,1)] md:block"
               style={{
-                minWidth: 280,
+                minWidth: 320,
                 transform: cardVisible
-                  ? "rotate(-2deg) translateY(0) scale(1)"
-                  : "rotate(0deg) translateY(20px) scale(0.95)",
+                  ? "rotate(-3deg) translateY(0) scale(1)"
+                  : "rotate(0deg) translateY(30px) scale(0.9)",
                 opacity: cardVisible ? 1 : 0,
               }}
             >
               {/* Caption area */}
-              <div className="px-5 py-4">
+              <div className="px-7 py-5">
                 <div className="overflow-hidden">
                   <p
                     className="font-script text-xl text-gold leading-tight"

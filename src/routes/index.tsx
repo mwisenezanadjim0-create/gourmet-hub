@@ -7,6 +7,7 @@ import { useCart, formatPrice } from "@/lib/cart";
 import aboutInterior from "@/assets/about-interior.jpg";
 import { toast } from "sonner";
 import { useState, useEffect, useRef, useCallback } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import img1 from "@/assets/1.jpg";
 import img2 from "@/assets/2.jpg";
 import img3 from "@/assets/3.jpg";
@@ -41,7 +42,8 @@ const heroSlides = [
       accent: "essence",
       script: "luxury coffee.",
     },
-    description: "An exclusive sanctuary in Kigali. We craft with precision, source the rarest beans, and serve with uncompromising elegance.",
+    description:
+      "An exclusive sanctuary in Kigali. We craft with precision, source the rarest beans, and serve with uncompromising elegance.",
     caption: "The pinnacle of Kigali's coffee culture",
     label: "Luxury Travel Guide",
   },
@@ -53,7 +55,8 @@ const heroSlides = [
       accent: "taste",
       script: "fine dining.",
     },
-    description: "Experience culinary excellence where every dish tells a story of passion, precision, and locally sourced perfection.",
+    description:
+      "Experience culinary excellence where every dish tells a story of passion, precision, and locally sourced perfection.",
     caption: "A sanctuary of taste & refinement",
     label: "Fine Dining Weekly",
   },
@@ -65,7 +68,8 @@ const heroSlides = [
       accent: "detail",
       script: "of culinary art.",
     },
-    description: "Our chefs blend traditional techniques with modern innovation to create an unforgettable performance of flavors.",
+    description:
+      "Our chefs blend traditional techniques with modern innovation to create an unforgettable performance of flavors.",
     caption: "Where every detail is a masterpiece",
     label: "Gourmet International",
   },
@@ -77,7 +81,8 @@ const heroSlides = [
       accent: "pure",
       script: "absolute luxury.",
     },
-    description: "Escape to a world of refined comfort and exquisite taste, right in the heart of Kigali's vibrant culture.",
+    description:
+      "Escape to a world of refined comfort and exquisite taste, right in the heart of Kigali's vibrant culture.",
     caption: "Luxury redefined, one cup at a time",
     label: "Prestige Magazine",
   },
@@ -89,7 +94,8 @@ const heroSlides = [
       accent: "premium",
       script: "gourmet dining.",
     },
-    description: "Discover a sanctuary where luxury meets the plate, and every meal is a celebration of the finest ingredients.",
+    description:
+      "Discover a sanctuary where luxury meets the plate, and every meal is a celebration of the finest ingredients.",
     caption: "An experience beyond the ordinary",
     label: "Culinary Arts Review",
   },
@@ -106,10 +112,11 @@ function HomePage() {
   const nextSlide = useCallback(() => {
     setCardVisible(false);
     setTimeout(() => {
-      setDirection(1);
       setActiveSlide((prev) => (prev + 1) % heroSlides.length);
-      setCardVisible(true);
-    }, 500);
+      setDirection(1);
+      // Wait a tiny bit for the slide change to register before showing the card again
+      setTimeout(() => setCardVisible(true), 50);
+    }, 600); // Increased delay for smoother transition
   }, []);
 
   useEffect(() => {
@@ -121,7 +128,7 @@ function HomePage() {
           }
         });
       },
-      { threshold: 0.1, },
+      { threshold: 0.1 },
     );
 
     document.querySelectorAll(".reveal-on-scroll").forEach((el) => observer.observe(el));
@@ -130,11 +137,20 @@ function HomePage() {
 
   useEffect(() => {
     if (isPaused) return;
-    intervalRef.current = setInterval(nextSlide, 4500);
+    intervalRef.current = setInterval(nextSlide, 10000);
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
   }, [nextSlide, isPaused]);
+
+  const prevSlide = () => {
+    setCardVisible(false);
+    setTimeout(() => {
+      setDirection(-1);
+      setActiveSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+      setTimeout(() => setCardVisible(true), 50);
+    }, 600);
+  };
 
   const goToSlide = (index: number) => {
     if (index === activeSlide) return;
@@ -163,73 +179,131 @@ function HomePage() {
   return (
     <SiteLayout>
       {/* HERO */}
-      <section 
-        className="relative overflow-hidden flex items-center min-h-[90vh]"
+      <section
+        className="relative flex min-h-screen items-center overflow-hidden"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
-        <div className="mx-auto grid max-w-7xl w-full gap-10 px-6 pb-24 pt-24 md:grid-cols-[1.1fr_1fr] md:gap-20">
-          <div className="relative z-10 flex flex-col justify-center rounded-[2.5rem] border border-black/5 bg-white/40 p-8 shadow-2xl shadow-black/5 backdrop-blur-md md:border-none md:bg-transparent md:p-0 md:shadow-none md:backdrop-blur-none">
-            <span className="mb-6 inline-flex items-center gap-2 text-sm uppercase tracking-[0.35em] text-olive">
-              <span className="h-px w-10 bg-olive/60" /> Kigali · est. 2024
+        {/* ─── Mobile: full-bleed background image (hidden on md+) ─── */}
+        <div className="absolute inset-0 z-0 overflow-hidden md:hidden">
+          {heroSlides.map((slide, i) => (
+            <div
+              key={i}
+              className={`absolute inset-0 h-full w-full transition-all duration-1200 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+                activeSlide === i
+                  ? "opacity-100 z-20 scale-100 pointer-events-auto"
+                  : "opacity-0 z-10 scale-110 pointer-events-none"
+              }`}
+            >
+              <img
+                src={slide.src}
+                alt={slide.alt}
+                width={1600}
+                height={1600}
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/40 pointer-events-none" />
+            </div>
+          ))}
+
+          {/* Navigation arrows (mobile) */}
+          <div className="absolute inset-x-4 top-1/2 z-30 flex -translate-y-1/2 justify-between pointer-events-none">
+            <button
+              onClick={(e) => { e.stopPropagation(); prevSlide(); }}
+              className="group pointer-events-auto flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/10 text-white/70 backdrop-blur-sm transition-all hover:border-gold hover:bg-black/30 hover:text-gold"
+              aria-label="Previous slide"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button
+              onClick={(e) => { e.stopPropagation(); nextSlide(); }}
+              className="group pointer-events-auto flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/10 text-white/70 backdrop-blur-sm transition-all hover:border-gold hover:bg-black/30 hover:text-gold"
+              aria-label="Next slide"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
+
+          {/* Progress dots (mobile) */}
+          <div className="absolute bottom-6 left-1/2 z-30 flex -translate-x-1/2 gap-2">
+            {heroSlides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goToSlide(i)}
+                aria-label={`Go to slide ${i + 1}`}
+                className="group relative h-2 p-1 focus:outline-none"
+              >
+                <div
+                  className={`h-1.5 rounded-full transition-all duration-500 ${
+                    i === activeSlide ? "w-10 bg-gold" : "w-2 bg-white/40"
+                  }`}
+                />
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* ─── Main content grid ─── */}
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col gap-10 px-0 pb-24 pt-24 md:grid md:grid-cols-[0.7fr_1.3fr] md:gap-12 md:px-6">
+
+          {/* Text content */}
+          <div className="relative z-30 mx-6 flex flex-col justify-center rounded-[2.5rem] border border-white/10 bg-[#1a0f0a]/40 p-8 shadow-2xl backdrop-blur-xl md:mx-0 md:rounded-none md:border-none md:bg-transparent md:p-0 md:shadow-none md:backdrop-blur-none">
+            <span className="mb-6 inline-flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.4em] text-gold/80 md:text-sm md:text-olive">
+              <span className="h-px w-8 bg-gold/40 md:w-10 md:bg-olive/60" /> Kigali · est. 2024
             </span>
             <div className="overflow-hidden">
               <h1
-                className="font-display text-3xl leading-[1.1] transition-all duration-800 ease-out sm:text-5xl md:text-8xl md:leading-[1.02]"
-                style={{
-                  opacity: cardVisible ? 1 : 0,
-                  transform: cardVisible ? "translateY(0)" : "translateY(30px)",
-                }}
+                className={`font-display text-4xl leading-[1.1] text-white transition-all duration-800 ease-out md:text-8xl md:leading-[1.02] md:text-foreground ${
+                  cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7.5"
+                }`}
               >
-                {heroSlides[activeSlide].title.main} <span className="italic text-gold">{heroSlides[activeSlide].title.accent}</span>
+                {heroSlides[activeSlide].title.main}{" "}
+                <span className="font-script text-5xl text-gold md:text-9xl">{heroSlides[activeSlide].title.accent}</span>
                 <br />
-                <span className="font-script text-6xl text-gold md:text-9xl">{heroSlides[activeSlide].title.script}</span>
+                <span className="font-script text-4xl text-gold md:text-8xl">{heroSlides[activeSlide].title.script}</span>
               </h1>
             </div>
             <div className="overflow-hidden">
               <p
-                className="mt-8 max-w-lg text-lg leading-relaxed text-muted-foreground/90 transition-all delay-150 duration-800 ease-out md:text-xl"
-                style={{
-                  opacity: cardVisible ? 1 : 0,
-                  transform: cardVisible ? "translateY(0)" : "translateY(15px)",
-                }}
+                className={`mt-6 max-w-md text-sm font-medium leading-relaxed tracking-wide text-white/90 transition-all delay-150 duration-800 ease-out md:mt-8 md:text-xl md:text-muted-foreground/90 ${
+                  cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3.75"
+                }`}
               >
                 {heroSlides[activeSlide].description}
               </p>
             </div>
-            <div className="mt-10 flex flex-wrap gap-4">
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <Link
                 to="/menu"
-                className="inline-flex items-center justify-center rounded-full bg-terracotta px-8 py-3.5 text-sm uppercase tracking-[0.22em] text-primary-foreground shadow-lg shadow-terracotta/20 transition-all hover:bg-ember hover:shadow-terracotta/30"
+                className="inline-flex items-center justify-center rounded-full bg-[#1a0f0a] px-8 py-3.5 text-[10px] font-bold uppercase tracking-[0.25em] text-white shadow-xl transition-all hover:bg-black md:bg-terracotta md:text-xs md:tracking-[0.22em] md:text-primary-foreground md:hover:bg-ember"
               >
                 Order Online
               </Link>
               <Link
                 to="/about"
-                className="inline-flex items-center justify-center rounded-full border border-foreground/30 px-8 py-3.5 text-sm uppercase tracking-[0.22em] transition-colors hover:border-terracotta hover:text-terracotta"
+                className="inline-flex items-center justify-center rounded-full border border-white/30 bg-white/5 px-8 py-3.5 text-[10px] font-bold uppercase tracking-[0.25em] text-white backdrop-blur-sm transition-colors hover:bg-white/10 md:border-foreground/30 md:bg-transparent md:text-xs md:tracking-[0.22em] md:text-foreground md:hover:border-terracotta md:hover:text-terracotta"
               >
                 Our Story
               </Link>
             </div>
           </div>
 
-          <div className="relative">
+          {/* ─── Desktop: image column (hidden on mobile) ─── */}
+          <div className="relative hidden md:block">
             {/* Glow orbs */}
             <div className="absolute -right-10 -top-10 h-72 w-72 rounded-full bg-gold/25 blur-3xl" />
             <div className="absolute -bottom-10 left-8 h-64 w-64 rounded-full bg-terracotta/25 blur-3xl" />
 
-            {/* Main hero image — cross-fade slideshow */}
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[3.5rem] border border-border/40 bg-muted shadow-2xl shadow-foreground/5 md:scale-105">
+            {/* Image slideshow */}
+            <div className="relative aspect-[3/2] overflow-hidden rounded-[2.5rem] border border-border/40 bg-muted shadow-2xl shadow-foreground/5">
               {heroSlides.map((slide, i) => (
                 <div
                   key={i}
-                  className="absolute inset-0 h-full w-full transition-all duration-1200 ease-[cubic-bezier(0.23,1,0.32,1)]"
-                  style={{
-                    opacity: activeSlide === i ? 1 : 0,
-                    zIndex: activeSlide === i ? 20 : 10,
-                    transform: activeSlide === i ? "scale(1)" : "scale(1.1)",
-                    pointerEvents: activeSlide === i ? "auto" : "none",
-                  }}
+                  className={`absolute inset-0 h-full w-full transition-all duration-1200 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+                    activeSlide === i
+                      ? "opacity-100 z-20 scale-100 pointer-events-auto"
+                      : "opacity-0 z-10 scale-110 pointer-events-none"
+                  }`}
                 >
                   <img
                     src={slide.src}
@@ -242,7 +316,25 @@ function HomePage() {
                 </div>
               ))}
 
-              {/* Slide progress dots */}
+              {/* Navigation arrows (desktop) */}
+              <div className="absolute inset-x-4 top-1/2 z-30 flex -translate-y-1/2 justify-between pointer-events-none">
+                <button
+                  onClick={(e) => { e.stopPropagation(); prevSlide(); }}
+                  className="group pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-black/10 text-white/70 backdrop-blur-sm transition-all hover:border-gold hover:bg-black/30 hover:text-gold"
+                  aria-label="Previous slide"
+                >
+                  <ChevronLeft className="h-6 w-6 transition-transform group-hover:-translate-x-0.5" />
+                </button>
+                <button
+                  onClick={(e) => { e.stopPropagation(); nextSlide(); }}
+                  className="group pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-black/10 text-white/70 backdrop-blur-sm transition-all hover:border-gold hover:bg-black/30 hover:text-gold"
+                  aria-label="Next slide"
+                >
+                  <ChevronRight className="h-6 w-6 transition-transform group-hover:translate-x-0.5" />
+                </button>
+              </div>
+
+              {/* Progress dots (desktop) */}
               <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 gap-2">
                 {heroSlides.map((_, i) => (
                   <button
@@ -251,14 +343,10 @@ function HomePage() {
                     aria-label={`Go to slide ${i + 1}`}
                     className="group relative h-2 p-1 focus:outline-none"
                   >
-                    <div 
-                      className="h-1.5 rounded-full transition-all duration-500"
-                      style={{
-                        width: i === activeSlide ? "2.5rem" : "0.5rem",
-                        background: i === activeSlide
-                          ? "var(--gold, #c9a84c)"
-                          : "rgba(255,255,255,0.4)",
-                      }}
+                    <div
+                      className={`h-1.5 rounded-full transition-all duration-500 ${
+                        i === activeSlide ? "w-10 bg-gold" : "w-2 bg-white/40"
+                      }`}
                     />
                     <div className="absolute -inset-1 rounded-full opacity-0 group-hover:bg-white/10 transition-opacity" />
                   </button>
@@ -268,52 +356,38 @@ function HomePage() {
 
             {/* Auto-sliding floating card */}
             <div
-              className="absolute -left-12 bottom-20 hidden -rotate-3 overflow-hidden rounded-3xl border border-gold/20 bg-card/95 shadow-[0_20px_50px_rgba(0,0,0,0.15)] backdrop-blur-3xl transition-all duration-800 ease-[cubic-bezier(0.23,1,0.32,1)] md:block"
-              style={{
-                minWidth: 320,
-                transform: cardVisible
-                  ? "rotate(-3deg) translateY(0) scale(1)"
-                  : "rotate(0deg) translateY(30px) scale(0.9)",
-                opacity: cardVisible ? 1 : 0,
-              }}
+              className={`absolute -left-12 bottom-20 -rotate-3 overflow-hidden rounded-3xl border border-gold/20 bg-card/95 shadow-[0_20px_50px_rgba(0,0,0,0.15)] backdrop-blur-3xl transition-all duration-800 ease-[cubic-bezier(0.23,1,0.32,1)] min-w-[320px] ${
+                cardVisible
+                  ? "-rotate-3 translate-y-0 scale-100 opacity-100"
+                  : "rotate-0 translate-y-7.5 scale-90 opacity-0"
+              }`}
             >
-              {/* Caption area */}
               <div className="px-7 py-5">
                 <div className="overflow-hidden">
                   <p
-                    className="font-script text-xl text-gold leading-tight"
-                    style={{
-                      opacity: cardVisible ? 1 : 0,
-                      transform: cardVisible ? "translateY(0)" : "translateY(15px)",
-                      transition: "opacity 500ms ease, transform 500ms ease",
-                    }}
+                    className={`font-script text-xl text-gold leading-tight transition-all duration-500 ${
+                      cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3.75"
+                    }`}
                   >
                     &ldquo;{heroSlides[activeSlide].caption}&rdquo;
                   </p>
                 </div>
                 <div className="overflow-hidden">
                   <p
-                    className="mt-1.5 text-[9px] uppercase tracking-[0.2em] text-muted-foreground/80 font-medium"
-                    style={{
-                      opacity: cardVisible ? 1 : 0,
-                      transform: cardVisible ? "translateY(0)" : "translateY(10px)",
-                      transition: "opacity 500ms ease 100ms, transform 500ms ease 100ms",
-                    }}
+                    className={`mt-1.5 text-[9px] uppercase tracking-[0.2em] text-muted-foreground/80 font-medium transition-all duration-500 delay-100 ${
+                      cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2.5"
+                    }`}
                   >
                     — {heroSlides[activeSlide].label}
                   </p>
                 </div>
               </div>
-
-              {/* Progress bar at the very bottom */}
               <div className="relative h-0.5 w-full bg-border/10">
                 <div
-                  className="absolute inset-0 bg-gold/80 transition-all duration-4500 ease-linear"
+                  className={`absolute inset-0 bg-gold/80 ${
+                    cardVisible ? "w-full opacity-100 slider-progress-bar" : "w-0 opacity-0 slider-progress-reset"
+                  }`}
                   key={activeSlide}
-                  style={{
-                    width: cardVisible ? "100%" : "0%",
-                    opacity: cardVisible ? 1 : 0,
-                  }}
                 />
               </div>
             </div>
@@ -459,7 +533,8 @@ function HomePage() {
           Order tonight. Eat by the fire at home.
         </h2>
         <p className="mx-auto mt-6 max-w-xl text-muted-foreground">
-          Same kitchen. Same roasted beans. Packed warm in linen-wrapped boxes and waiting at your door.
+          Same kitchen. Same roasted beans. Packed warm in linen-wrapped boxes and waiting at your
+          door.
         </p>
         <Link
           to="/menu"

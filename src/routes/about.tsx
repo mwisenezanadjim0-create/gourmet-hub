@@ -1,11 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteLayout";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+import Fade from "embla-carousel-fade";
 import interior from "@/assets/about-interior.jpg";
 import chef from "@/assets/about-chef.jpg";
 import kitchen from "@/assets/about-kitchen.jpg";
 import olivegrove from "@/assets/about-olivegrove.jpg";
 import table from "@/assets/about-table.jpg";
 import market from "@/assets/about-market.jpg";
+import heroDish from "@/assets/hero-dish.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -29,11 +33,42 @@ function AboutPage() {
     { src: market, alt: "Baskets of fresh produce at market" },
   ];
 
+  const introSlides = [
+    { src: interior, title: "Welcome to Aslan Cafe", subtitle: "Where luxury meets taste" },
+    { src: heroDish, title: "Gourmet Flavors", subtitle: "Crafted with passion" },
+    { src: table, title: "An Unforgettable Experience", subtitle: "Dining reimagined" },
+  ];
+
   return (
     <SiteLayout>
+      {/* Intro Slider */}
+      <section className="relative w-full">
+        <Carousel 
+          className="w-full" 
+          opts={{ loop: true }}
+          plugins={[Autoplay({ delay: 4000 }), Fade()]}
+        >
+          <CarouselContent>
+            {introSlides.map((slide, index) => (
+              <CarouselItem key={index} className="relative h-[60vh] min-h-[400px] w-full">
+                <img src={slide.src} alt={slide.title} className="absolute inset-0 h-full w-full object-cover brightness-75" />
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-background/20 p-6 text-center">
+                  <span className="font-script text-4xl text-gold drop-shadow-md md:text-5xl">{slide.subtitle}</span>
+                  <h1 className="mt-4 font-display text-5xl text-white drop-shadow-lg md:text-7xl">{slide.title}</h1>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <div className="absolute bottom-10 right-20 z-10 flex gap-4">
+            <CarouselPrevious className="static h-12 w-12 border-white/20 bg-background/50 text-white backdrop-blur hover:bg-background hover:text-foreground" />
+            <CarouselNext className="static h-12 w-12 border-white/20 bg-background/50 text-white backdrop-blur hover:bg-background hover:text-foreground" />
+          </div>
+        </Carousel>
+      </section>
+
       <section className="mx-auto max-w-4xl px-6 pb-10 pt-16 text-center">
         <span className="font-script text-3xl text-terracotta">a small restaurant</span>
-        <h1 className="mt-2 font-display text-5xl md:text-6xl">Cooking slowly, on purpose.</h1>
+        <h2 className="mt-2 font-display text-5xl md:text-6xl">Cooking slowly, on purpose.</h2>
         <p className="mx-auto mt-6 text-lg leading-relaxed text-muted-foreground">
           Aslan Cafe Luxe &amp; Resto began as a vision for premium dining in the heart of Kigali.
           Our mission is to bring together the finest local ingredients with international gourmet techniques,

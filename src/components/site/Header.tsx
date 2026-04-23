@@ -12,7 +12,7 @@ export function Header() {
   const { count } = useCart();
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-[#1a0f0a]/10 backdrop-blur-xl">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#1a0f0a]/30 backdrop-blur-3xl shadow-2xl">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
         <Link to="/" className="group flex items-center gap-3 leading-none">
           <div className="relative h-11 w-11 overflow-hidden rounded-full border border-gold/40 shadow-lg transition-transform group-hover:scale-105">
@@ -27,7 +27,7 @@ export function Header() {
           </div>
           <div className="flex flex-col">
             <span className="font-script text-xl text-gold">Aslan Cafe</span>
-            <span className="-mt-1 font-sans text-[9px] font-medium tracking-[0.4em] text-white/60 uppercase">
+            <span className="-mt-1 font-sans text-[9px] font-medium tracking-[0.4em] text-white/80 uppercase">
               Luxe &amp; Resto
             </span>
           </div>
@@ -40,7 +40,7 @@ export function Header() {
               to={link.to}
               activeOptions={{ exact: link.exact }}
               activeProps={{ className: "text-gold" }}
-              inactiveProps={{ className: "text-white/80 hover:text-gold" }}
+              inactiveProps={{ className: "text-white hover:text-gold" }}
               className="relative text-[11px] font-bold uppercase tracking-[0.25em] transition-colors"
             >
               {link.label}
@@ -51,14 +51,14 @@ export function Header() {
         <div className="flex items-center gap-4">
           <Link
             to="/menu"
-            className="hidden rounded-full border border-gold/40 bg-gold/5 px-6 py-2.5 text-[10px] font-bold uppercase tracking-[0.25em] text-gold transition-all hover:bg-gold hover:text-black sm:inline-block"
+            className="hidden rounded-full border border-gold/40 bg-gold/10 px-6 py-2.5 text-[10px] font-bold uppercase tracking-[0.25em] text-gold transition-all hover:bg-gold hover:text-black sm:inline-block"
           >
             Order Now
           </Link>
           <Link
             to="/cart"
             aria-label="View cart"
-            className="relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-all hover:border-gold/50 hover:text-gold"
+            className="relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition-all hover:border-gold/50 hover:text-gold"
           >
             <ShoppingBag className="h-4 w-4" />
             {count > 0 && (

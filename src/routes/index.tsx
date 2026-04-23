@@ -63,7 +63,7 @@ const heroSlides = [
     title: {
       main: "Crafting every",
       accent: "detail",
-      script: "culinary art.",
+      script: "of culinary art.",
     },
     description: "Our chefs blend traditional techniques with modern innovation to create an unforgettable performance of flavors.",
     caption: "Where every detail is a masterpiece",

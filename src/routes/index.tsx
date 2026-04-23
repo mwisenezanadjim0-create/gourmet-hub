@@ -48,14 +48,14 @@ function HomePage() {
             <span className="mb-6 inline-flex items-center gap-2 text-sm uppercase tracking-[0.35em] text-olive">
               <span className="h-px w-10 bg-olive/60" /> Kigali · est. 2024
             </span>
-            <h1 className="font-display text-5xl leading-[1.02] sm:text-6xl md:text-7xl">
-              Cooked over <span className="italic text-terracotta">embers.</span>
+            <h1 className="font-display text-5xl leading-[1.02] sm:text-6xl md:text-8xl">
+              Elevating the <span className="italic text-gold">essence</span>
               <br />
-              Dressed in <span className="font-script text-6xl text-gold md:text-7xl">olive oil.</span>
+              of <span className="font-script text-7xl text-gold md:text-9xl">luxury coffee.</span>
             </h1>
-            <p className="mt-8 max-w-lg text-lg leading-relaxed text-muted-foreground">
-              A premium dining experience in the heart of Kigali. We craft with passion,
-              source only the finest ingredients, and serve with luxury in mind.
+            <p className="mt-8 max-w-lg text-xl leading-relaxed text-muted-foreground/90">
+              An exclusive sanctuary in Kigali. We craft with precision,
+              source the rarest beans, and serve with uncompromising elegance.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
@@ -79,9 +79,9 @@ function HomePage() {
             <div className="relative aspect-[4/5] overflow-hidden rounded-[3rem] border border-border/60 shadow-2xl shadow-foreground/10">
               <img src={heroDish} alt="Lamb with olives and pomegranate on terracotta" className="h-full w-full object-cover" width={1600} height={2000} />
             </div>
-            <div className="absolute -left-6 bottom-10 hidden rotate-[-6deg] rounded-2xl bg-card/95 px-6 py-4 shadow-xl backdrop-blur md:block">
-              <p className="font-script text-2xl text-terracotta">"a love letter to the fire"</p>
-              <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">— NY Eater</p>
+            <div className="absolute -left-6 bottom-10 hidden rotate-[-6deg] rounded-2xl bg-card/95 px-6 py-4 shadow-2xl backdrop-blur-xl border border-gold/20 md:block">
+              <p className="font-script text-2xl text-gold">"The pinnacle of Kigali's coffee culture"</p>
+              <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground/70">— Luxury Travel Guide</p>
             </div>
           </div>
         </div>
@@ -98,11 +98,11 @@ function HomePage() {
               <span className="h-px w-8 bg-olive/60" /> Our Kitchen
             </span>
             <h2 className="font-display text-4xl leading-tight md:text-5xl">
-              A restaurant built around <span className="italic text-terracotta">one fire</span> and three stubborn ideas.
+              A sanctuary built around <span className="italic text-gold">perfection</span> and the pursuit of taste.
             </h2>
             <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-              Olive oil we press ourselves. Produce from farmers we can name by their first children.
-              And the belief that the best meals are long, loud, and a little messy.
+              Rare beans sourced from the volcanic soils of our region, roasted to perfection.
+              We believe that every cup should be a moment of absolute luxury.
             </p>
             <Link to="/about" className="mt-8 inline-flex items-center gap-2 text-sm uppercase tracking-[0.25em] text-terracotta hover:gap-3 transition-all">
               Meet the table <span aria-hidden>→</span>

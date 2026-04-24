@@ -87,10 +87,10 @@ function AboutPage() {
                   className="absolute inset-0 h-full w-full object-cover brightness-75"
                 />
                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-background/20 p-6 text-center">
-                  <span className="font-script text-4xl text-gold drop-shadow-md md:text-5xl">
+                  <span className="font-script text-3xl md:text-5xl text-gold drop-shadow-md">
                     {slide.subtitle}
                   </span>
-                  <h1 className="mt-4 font-display text-5xl text-white drop-shadow-lg md:text-7xl">
+                  <h1 className="mt-3 font-display text-4xl md:text-7xl text-white drop-shadow-lg">
                     {slide.title}
                   </h1>
                 </div>
@@ -105,9 +105,9 @@ function AboutPage() {
       </section>
 
       <section className="reveal-on-scroll mx-auto max-w-4xl px-6 pb-10 pt-16 text-center">
-        <span className="font-script text-3xl text-terracotta">a luxury restaurant</span>
-        <h2 className="mt-2 font-display text-5xl md:text-6xl">Cooking slowly, on purpose.</h2>
-        <p className="mx-auto mt-6 text-lg leading-relaxed text-muted-foreground">
+        <span className="font-script text-2xl md:text-3xl text-terracotta">a luxury restaurant</span>
+        <h2 className="mt-2 font-display text-4xl md:text-6xl">Cooking slowly, on purpose.</h2>
+        <p className="mx-auto mt-6 text-base md:text-lg leading-relaxed text-muted-foreground">
           Aslan Cafe Luxe &amp; Resto began as a vision for premium dining in the heart of Kigali.
           Our mission is to bring together the finest local ingredients with international gourmet
           techniques, creating an atmosphere where luxury meets the plate.

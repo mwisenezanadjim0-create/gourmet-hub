@@ -252,16 +252,18 @@ nav a,
 }
 
 /* 3D Curved Slider */
-.banner-3d {
-  width: 100%;
-  height: 650px;
-  text-align: center;
-  overflow: hidden;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  perspective: 2000px;
+@media (min-width: 768px) {
+  .banner-3d {
+    width: 100%;
+    height: 650px;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 2000px;
+  }
 }
 
 .banner-3d .slider-3d {
@@ -335,4 +337,31 @@ nav a,
     width: 200px;
     height: 280px;
   }
+}
+
+/* Infinite Marquee */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+  display: flex;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+/* Mobile Featured Slider */
+.featured-mobile-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+  gap: 1rem;
+}
+
+.featured-mobile-item {
+  width: 220px;
+  height: 280px;
+  flex-shrink: 0;
 }

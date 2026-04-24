@@ -68,8 +68,8 @@ function MenuPage() {
   return (
     <SiteLayout>
       <section className="reveal-on-scroll mx-auto max-w-6xl px-6 pb-8 pt-16 text-center">
-        <span className="font-script text-3xl text-terracotta">the menu</span>
-        <h1 className="mt-2 font-display text-5xl md:text-6xl">A seasonal table</h1>
+        <span className="font-script text-2xl md:text-3xl text-terracotta">the menu</span>
+        <h1 className="mt-2 font-display text-4xl md:text-6xl">A seasonal table</h1>
         <p className="mx-auto mt-5 max-w-xl text-muted-foreground">
           We change things often. Seasonality leads; the rest follows. Everything is made in-house,
           from the bread to the pasta.
@@ -77,14 +77,14 @@ function MenuPage() {
         <div className="divider-organic mx-auto mt-8" />
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 pb-24">
+      <section className="mx-auto max-w-6xl px-6 pb-24">d
         {isLoading && <p className="py-20 text-center text-muted-foreground">Loading the menu…</p>}
 
         <div className="space-y-20">
           {grouped.map((group) => (
             <div key={group.category} className="reveal-on-scroll">
               <div className="mb-10 flex items-center gap-6">
-                <h2 className="font-display text-3xl md:text-4xl">{group.category}</h2>
+                <h2 className="font-display text-2xl md:text-4xl">{group.category}</h2>
                 <span className="h-px flex-1 bg-border" />
               </div>
 
@@ -92,11 +92,11 @@ function MenuPage() {
                 {group.items.map((item, idx) => (
                   <article
                     key={item.id}
-                    className={`reveal-on-scroll group flex gap-5 rounded-[2rem] border border-border/60 bg-card/70 p-5 shadow-sm backdrop-blur transition-all hover:-translate-y-0.5 hover:shadow-xl reveal-delay-${(idx % 6) * 100 + 100} ${
+                    className={`reveal-on-scroll group flex flex-col sm:flex-row gap-5 rounded-2xl md:rounded-[2rem] border border-border/60 bg-card/70 p-5 shadow-sm backdrop-blur transition-all hover:-translate-y-0.5 hover:shadow-xl reveal-delay-${(idx % 6) * 100 + 100} ${
                       idx % 2 === 1 ? "md:translate-y-6" : ""
                     }`}
                   >
-                    <div className="relative aspect-square w-36 shrink-0 overflow-hidden rounded-2xl sm:w-40">
+                    <div className="relative aspect-square w-full sm:w-36 md:w-40 shrink-0 overflow-hidden rounded-xl md:rounded-2xl">
                       {imageForSlug(item.slug) ? (
                         <img
                           src={imageForSlug(item.slug)}
@@ -112,8 +112,8 @@ function MenuPage() {
                     </div>
                     <div className="flex min-w-0 flex-1 flex-col">
                       <div className="flex items-baseline justify-between gap-3">
-                        <h3 className="font-display text-xl leading-tight">{item.name}</h3>
-                        <span className="font-display text-lg text-terracotta">
+                        <h3 className="font-display text-lg md:text-xl leading-tight">{item.name}</h3>
+                        <span className="font-display text-base md:text-lg text-terracotta">
                           {formatPrice(Number(item.price))}
                         </span>
                       </div>

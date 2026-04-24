@@ -149,10 +149,10 @@ function StaffDashboard() {
   return (
     <div className="min-h-screen bg-background">
       <header className="border-b border-border/60 bg-card/70 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
+        <div className="mx-auto flex max-w-7xl flex-col sm:flex-row sm:items-center justify-between gap-4 px-6 py-5">
           <div>
-            <span className="font-script text-2xl text-terracotta">Aslan Cafe Luxe & Resto</span>
-            <h1 className="font-display text-xl leading-tight">Orders Dashboard</h1>
+            <span className="font-script text-xl md:text-2xl text-terracotta">Aslan Cafe Luxe & Resto</span>
+            <h1 className="font-display text-lg md:text-xl leading-tight">Orders Dashboard</h1>
           </div>
           <div className="flex items-center gap-2">
             <button

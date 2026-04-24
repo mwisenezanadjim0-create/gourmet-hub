@@ -48,8 +48,8 @@ function StaffLoginPage() {
   return (
     <SiteLayout>
       <section className="mx-auto flex max-w-md flex-col items-center px-6 py-20">
-        <span className="font-script text-3xl text-terracotta">back of house</span>
-        <h1 className="mt-2 font-display text-4xl">Staff Portal</h1>
+        <span className="font-script text-2xl md:text-3xl text-terracotta">back of house</span>
+        <h1 className="mt-2 font-display text-3xl md:text-4xl">Staff Portal</h1>
 
         <form
           onSubmit={handleSubmit}
@@ -64,7 +64,7 @@ function StaffLoginPage() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full rounded-xl border border-border bg-background px-4 py-2.5 outline-none focus:border-terracotta"
+              className="w-full rounded-xl border border-border bg-background px-4 py-2.5 outline-none focus:border-terracotta text-base"
             />
           </label>
           <label className="block">
@@ -77,7 +77,7 @@ function StaffLoginPage() {
               minLength={6}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-xl border border-border bg-background px-4 py-2.5 outline-none focus:border-terracotta"
+              className="w-full rounded-xl border border-border bg-background px-4 py-2.5 outline-none focus:border-terracotta text-base"
             />
           </label>
 

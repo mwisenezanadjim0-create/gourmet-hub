@@ -8,6 +8,7 @@ import aboutInterior from "@/assets/about-interior.jpg";
 import { toast } from "sonner";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import img1 from "@/assets/1.jpg";
 import img2 from "@/assets/2.jpg";
 import img3 from "@/assets/3.jpg";
@@ -176,6 +177,25 @@ function HomePage() {
     },
   });
 
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: scrollRef,
+    offset: ["start start", "end end"],
+  });
+
+
+
+  const cardsOpacity = useTransform(scrollYProgress, [0.3, 0.6], [1, 0]);
+
+  const pullRight = useTransform(scrollYProgress, [0, 0.6], ["0%", "100vw"]);
+  const pullLeft = useTransform(scrollYProgress, [0, 0.6], ["0%", "-100vw"]);
+  const rotateRight = useTransform(scrollYProgress, [0, 0.6], [0, 15]);
+  const rotateLeft = useTransform(scrollYProgress, [0, 0.6], [0, -15]);
+
+  const ctaOpacity = useTransform(scrollYProgress, [0.5, 0.9], [0, 1]);
+  const ctaScale = useTransform(scrollYProgress, [0.5, 0.9], [0.8, 1]);
+  const pointerEventsCards = useTransform(scrollYProgress, (v) => (v > 0.6 ? "none" : "auto"));
+
   return (
     <SiteLayout>
       {/* HERO */}
@@ -208,11 +228,11 @@ function HomePage() {
         <div className="relative z-10 mx-auto flex w-full max-w-400 flex-col gap-10 px-0 pb-24 pt-24 md:grid md:grid-cols-[0.6fr_1.4fr] md:gap-16 md:px-12">
           {/* Text content */}
           <div className="relative z-30 mx-6 flex flex-col justify-center rounded-[2.5rem] border border-white/10 bg-[#1a0f0a]/40 p-8 shadow-2xl backdrop-blur-xl md:mx-0 md:rounded-none md:border-none md:bg-transparent md:p-0 md:shadow-none md:backdrop-blur-none">
-            <div className="absolute -left-30 z-50 top-0 md:-top-12 lg:-top-8">
+            <div className="absolute -top-20 left-0 z-50 md:-left-30 md:-top-12 lg:-top-8">
               <img
                 src="/REAL_LOGO.png"
                 alt="Aslan Cafe Luxe & Resto"
-                className="w-48 object-contain md:w-64"
+                className="w-40 object-contain md:w-64"
                 loading="eager"
               />
             </div>
@@ -433,63 +453,97 @@ function HomePage() {
             </div>
           </div>
         ) : (
-          <div className="banner-3d -mt-6">
-            <div
-              className="slider-3d"
-              style={{ "--quantity": featured?.length || 0 } as React.CSSProperties}
-            >
-              {featured?.map((item, idx) => (
-                <div
-                  key={item.id}
-                  className="item-3d group"
-                  style={{ "--position": idx + 1 } as React.CSSProperties}
-                >
-                  <div className="card-inner relative h-full w-full overflow-hidden rounded-[2rem] border border-white/10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)] transition-all duration-500 group-hover:border-gold/30 group-hover:shadow-gold/10">
-                    {imageForSlug(item.slug) ? (
-                      <img
-                        src={imageForSlug(item.slug)}
-                        alt={item.name}
-                        className="h-full w-full object-cover"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div className="h-full w-full bg-muted" />
-                    )}
+          <div className="relative w-full overflow-hidden">
+            {/* Desktop: 3D Curved Slider */}
+            <div className="banner-3d -mt-6 hidden md:flex">
+              <div
+                className="slider-3d"
+                style={{ "--quantity": featured?.length || 0 } as React.CSSProperties}
+              >
+                {featured?.map((item, idx) => (
+                  <div
+                    key={item.id}
+                    className="item-3d group"
+                    style={{ "--position": idx + 1 } as React.CSSProperties}
+                  >
+                    <div className="card-inner relative h-full w-full overflow-hidden rounded-[2rem] border border-white/10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)] transition-all duration-500 group-hover:border-gold/30 group-hover:shadow-gold/10">
+                      {imageForSlug(item.slug) ? (
+                        <img
+                          src={imageForSlug(item.slug)}
+                          alt={item.name}
+                          className="h-full w-full object-cover"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="h-full w-full bg-muted" />
+                      )}
 
-                    {/* Hover Overlay */}
-                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-[#1a0f0a]/90 subpixel-antialiased opacity-0 transition-all duration-500 group-hover:opacity-100">
-                      <h3 className="text-shadow-luxe px-6 text-center font-display text-2xl font-medium tracking-wide text-gold">
-                        {item.name}
-                      </h3>
-                      <p className="mb-2 font-display text-sm tracking-[0.2em] text-white/90">
-                        {Number(item.price).toLocaleString()} frw
-                      </p>
-                      <div className="flex flex-col gap-3">
-                        <Link
-                          to="/menu"
-                          className="flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-8 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-white transition-all hover:bg-white hover:text-black"
-                        >
-                          Discover
-                        </Link>
-                        <button
-                          onClick={() => {
-                            add({
-                              id: item.id,
-                              slug: item.slug,
-                              name: item.name,
-                              price: Number(item.price),
-                            });
-                            toast.success(`Added ${item.name} to your table`);
-                          }}
-                          className="flex items-center justify-center rounded-full bg-gold px-8 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-black transition-all hover:bg-ember hover:text-white"
-                        >
-                          Add to Table
-                        </button>
+                      {/* Hover Overlay */}
+                      <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-[#1a0f0a]/90 subpixel-antialiased opacity-0 transition-all duration-500 group-hover:opacity-100">
+                        <h3 className="text-shadow-luxe px-6 text-center font-display text-2xl font-medium tracking-wide text-gold">
+                          {item.name}
+                        </h3>
+                        <p className="mb-2 font-display text-sm tracking-[0.2em] text-white/90">
+                          {Number(item.price).toLocaleString()} frw
+                        </p>
+                        <div className="flex flex-col gap-3">
+                          <Link
+                            to="/menu"
+                            className="flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-8 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-white transition-all hover:bg-white hover:text-black"
+                          >
+                            Discover
+                          </Link>
+                          <button
+                            onClick={() => {
+                              add({
+                                id: item.id,
+                                slug: item.slug,
+                                name: item.name,
+                                price: Number(item.price),
+                              });
+                              toast.success(`Added ${item.name} to your table`);
+                            }}
+                            className="flex items-center justify-center rounded-full bg-gold px-8 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-black transition-all hover:bg-ember hover:text-white"
+                          >
+                            Add to Table
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Mobile: Horizontal Auto-Sliding Marquee */}
+            <div className="block md:hidden py-10">
+              <Link to="/menu" className="relative block w-full overflow-hidden">
+                <div className="flex w-max animate-marquee gap-4 px-4">
+                  {[...(featured || []), ...(featured || [])].map((item, idx) => (
+                    <div 
+                      key={`${item.id}-${idx}`} 
+                      className="relative h-[280px] w-[220px] shrink-0 overflow-hidden rounded-3xl border border-white/10 shadow-xl"
+                    >
+                      {imageForSlug(item.slug) ? (
+                        <img
+                          src={imageForSlug(item.slug)}
+                          alt={item.name}
+                          className="h-full w-full object-cover"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="h-full w-full bg-muted" />
+                      )}
+                      <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/90 via-black/40 to-transparent p-5">
+                        <p className="font-display text-lg text-gold leading-tight">{item.name}</p>
+                        <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-white/70">
+                          {Number(item.price).toLocaleString()} frw
+                        </p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </Link>
             </div>
           </div>
         )}
@@ -504,52 +558,102 @@ function HomePage() {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <section className="reveal-on-scroll bg-[color-mix(in_oklab,var(--olive)_15%,var(--background))] py-20">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="grid gap-8 md:grid-cols-3">
-            {[
-              {
-                q: "The kind of place you leave feeling slower, better, brighter.",
-                a: "Infatuation",
-              },
-              { q: "A fire-kissed homage to the Mediterranean.", a: "New York Times" },
-              { q: "Every plate tastes like somebody's grandmother cared.", a: "Resy Review" },
-            ].map((t, idx) => (
-              <figure
-                key={t.a}
-                className={`reveal-on-scroll relative rounded-3xl border border-border/60 bg-card/70 p-8 shadow-sm backdrop-blur reveal-delay-${idx * 100 + 200}`}
-              >
-                <div className="absolute -top-4 left-6 font-display text-6xl leading-none text-terracotta/40">
-                  "
-                </div>
-                <blockquote className="font-display text-xl leading-snug">{t.q}</blockquote>
-                <figcaption className="mt-6 text-xs uppercase tracking-[0.25em] text-muted-foreground">
-                  — {t.a}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* CARDS TO BUTTON SCROLL EFFECT */}
+      <div
+        ref={scrollRef}
+        className="relative h-[150vh] bg-[color-mix(in_oklab,var(--olive)_15%,var(--background))]"
+      >
+        <div className="sticky top-0 flex min-h-screen w-full flex-col items-center justify-center overflow-hidden py-10">
+          {/* CARDS */}
+          <motion.div
+            className="absolute z-10 mx-auto w-full max-w-6xl px-6"
+            style={{
+              pointerEvents: pointerEventsCards as unknown as React.CSSProperties["pointerEvents"],
+            }}
+          >
+            <div className="flex flex-col items-center gap-4 md:gap-8 max-w-2xl mx-auto px-4 md:px-0">
+              {[
+                {
+                  q: "The kind of place you leave feeling slower, better, brighter.",
+                  a: "Infatuation",
+                  x: pullRight,
+                  rotate: rotateRight,
+                },
+                {
+                  q: "A fire-kissed homage to the Mediterranean.",
+                  a: "New York Times",
+                  x: pullLeft,
+                  rotate: rotateLeft,
+                },
+                {
+                  q: "Every plate tastes like somebody's grandmother cared.",
+                  a: "Resy Review",
+                  x: pullRight,
+                  rotate: rotateRight,
+                },
+                {
+                  q: "A masterful performance of flavor and elegance.",
+                  a: "Eater",
+                  x: pullLeft,
+                  rotate: rotateLeft,
+                },
+              ].map((t, i) => (
+                <motion.figure
+                  key={t.a}
+                  style={{
+                    x: t.x,
+                    y: "0%",
+                    scale: 1,
+                    opacity: cardsOpacity,
+                    rotate: t.rotate,
+                  }}
+                  className="relative w-full rounded-3xl border border-border/60 bg-card/70 p-8 shadow-sm backdrop-blur"
+                >
+                  <div className="absolute -top-3 left-4 md:-top-4 md:left-6 font-display text-4xl md:text-6xl leading-none text-terracotta/40">
+                    "
+                  </div>
+                  <blockquote className="font-display text-sm md:text-xl leading-snug">{t.q}</blockquote>
+                  <figcaption className="mt-4 md:mt-6 text-[10px] md:text-xs uppercase tracking-[0.25em] text-muted-foreground">
+                    — {t.a}
+                  </figcaption>
+                </motion.figure>
+              ))}
+            </div>
+          </motion.div>
 
-      {/* CTA */}
-      <section className="reveal-on-scroll mx-auto max-w-5xl px-6 py-24 text-center">
-        <p className="font-script text-3xl text-terracotta">come hungry —</p>
-        <h2 className="mt-3 font-display text-4xl leading-tight md:text-6xl">
-          Order tonight. Eat by the fire at home.
-        </h2>
-        <p className="mx-auto mt-6 max-w-xl text-muted-foreground">
-          Same kitchen. Same roasted beans. Packed warm in linen-wrapped boxes and waiting at your
-          door.
-        </p>
-        <Link
-          to="/menu"
-          className="mt-10 inline-flex items-center justify-center rounded-full bg-terracotta px-10 py-4 text-sm uppercase tracking-[0.22em] text-primary-foreground shadow-lg transition-all hover:bg-ember"
-        >
-          Start your order
-        </Link>
-      </section>
+          {/* CTA */}
+          <motion.div
+            style={{ opacity: ctaOpacity, scale: ctaScale }}
+            className="absolute z-20 mx-auto max-w-5xl px-6 text-center"
+          >
+            <p className="font-script text-3xl text-terracotta">come hungry —</p>
+            <h2 className="mt-3 font-display text-4xl leading-tight md:text-6xl">
+              Order tonight. Eat by the fire at home.
+            </h2>
+            <p className="mx-auto mt-6 max-w-xl text-muted-foreground">
+              Same kitchen. Same roasted beans. Packed warm in linen-wrapped boxes and waiting at
+              your door.
+            </p>
+            <Link
+              to="/menu"
+              className="mt-10 inline-flex items-center justify-center rounded-full bg-terracotta px-10 py-4 text-sm uppercase tracking-[0.22em] text-primary-foreground shadow-lg transition-all hover:bg-ember"
+            >
+              Start your order
+            </Link>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* DELIVERY MARQUEE */}
+      <div className="relative flex w-full items-center overflow-hidden bg-background py-2 text-terracotta/90 border-y border-terracotta/10">
+        <div className="animate-marquee flex whitespace-nowrap font-display text-sm font-light uppercase tracking-[0.2em] md:text-base lg:text-lg">
+          {[...Array(12)].map((_, i) => (
+            <span key={i} className="flex-shrink-0 px-8">
+              HOT & FRESH DELIVERY • 
+            </span>
+          ))}
+        </div>
+      </div>
     </SiteLayout>
   );
 }

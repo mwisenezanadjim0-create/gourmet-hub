@@ -23,8 +23,8 @@ function OrderSuccessPage() {
         <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-terracotta/10">
           <CheckCircle2 className="h-10 w-10 text-terracotta" />
         </div>
-        <span className="mt-8 block font-script text-3xl text-terracotta">grazie</span>
-        <h1 className="mt-2 font-display text-5xl">Your order is in</h1>
+        <span className="mt-8 block font-script text-2xl md:text-3xl text-terracotta">grazie</span>
+        <h1 className="mt-2 font-display text-4xl md:text-5xl">Your order is in</h1>
         <p className="mx-auto mt-6 max-w-md text-muted-foreground">
           Our kitchen has it. We'll send a call if we have any questions. Expect delivery within
           45–60 minutes.

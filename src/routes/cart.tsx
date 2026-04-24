@@ -103,8 +103,8 @@ function CartPage() {
   return (
     <SiteLayout>
       <section className="reveal-on-scroll mx-auto max-w-6xl px-6 pb-6 pt-14 text-center">
-        <span className="font-script text-3xl text-terracotta">your table</span>
-        <h1 className="mt-2 font-display text-5xl">Review your order</h1>
+        <span className="font-script text-2xl md:text-3xl text-terracotta">your table</span>
+        <h1 className="mt-2 font-display text-4xl md:text-5xl">Review your order</h1>
         <div className="divider-organic mx-auto mt-6" />
       </section>
 
@@ -125,9 +125,9 @@ function CartPage() {
             {items.map((item, idx) => (
               <div
                 key={item.id}
-                className={`reveal-on-scroll flex gap-4 rounded-[1.75rem] border border-border/60 bg-card/80 p-4 shadow-sm backdrop-blur reveal-delay-${idx * 100 + 100}`}
+                className={`reveal-on-scroll flex gap-4 rounded-2xl md:rounded-[1.75rem] border border-border/60 bg-card/80 p-4 shadow-sm backdrop-blur reveal-delay-${idx * 100 + 100}`}
               >
-                <div className="aspect-square w-24 overflow-hidden rounded-xl sm:w-28">
+                <div className="aspect-square w-20 sm:w-28 overflow-hidden rounded-xl">
                   {imageForSlug(item.slug) ? (
                     <img
                       src={imageForSlug(item.slug)}
@@ -182,7 +182,7 @@ function CartPage() {
           {/* Checkout form */}
           <form
             onSubmit={handleCheckout}
-            className="reveal-on-scroll reveal-delay-200 h-fit space-y-5 rounded-[2rem] border border-border/60 bg-card/80 p-7 shadow-lg backdrop-blur"
+            className="reveal-on-scroll reveal-delay-200 h-fit space-y-5 rounded-[2rem] border border-border/60 bg-card/80 p-5 md:p-7 shadow-lg backdrop-blur"
           >
             <h2 className="font-display text-2xl">Delivery details</h2>
 
@@ -277,7 +277,7 @@ function CartPage() {
           border: 1px solid var(--border);
           background: var(--background);
           padding: 0.7rem 0.9rem;
-          font-size: 0.95rem;
+          font-size: 16px;
           outline: none;
           transition: border-color 0.15s;
         }

@@ -208,6 +208,14 @@ function HomePage() {
         <div className="relative z-10 mx-auto flex w-full max-w-400 flex-col gap-10 px-0 pb-24 pt-24 md:grid md:grid-cols-[0.6fr_1.4fr] md:gap-16 md:px-12">
           {/* Text content */}
           <div className="relative z-30 mx-6 flex flex-col justify-center rounded-[2.5rem] border border-white/10 bg-[#1a0f0a]/40 p-8 shadow-2xl backdrop-blur-xl md:mx-0 md:rounded-none md:border-none md:bg-transparent md:p-0 md:shadow-none md:backdrop-blur-none">
+            <div className="absolute -left-30 z-50 top-0 md:-top-12 lg:-top-8">
+              <img
+                src="/REAL_LOGO.png"
+                alt="Aslan Cafe Luxe & Resto"
+                className="w-48 object-contain md:w-64"
+                loading="eager"
+              />
+            </div>
             <span className="mb-6 inline-flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.4em] text-gold/80 md:text-sm md:text-gold">
               <span className="h-px w-8 bg-gold/40 md:w-10 md:bg-gold/60" /> Kigali · est. 2024
             </span>

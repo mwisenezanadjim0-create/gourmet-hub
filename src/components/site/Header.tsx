@@ -27,11 +27,23 @@ export function Header() {
   }, [isOpen]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#1a0f0a]/70 backdrop-blur-3xl transition-colors duration-500">
+    <motion.header
+      initial={false}
+      animate={isOpen ? "open" : "closed"}
+      variants={{
+        open: { height: "100vh", backgroundColor: "rgba(12, 7, 5, 0.65)" },
+        closed: { height: "80px", backgroundColor: "rgba(12, 7, 5, 0.7)" },
+      }}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      className="fixed inset-x-0 top-0 z-50 overflow-hidden border-b border-white/10 backdrop-blur-3xl"
+    >
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
         {/* Mobile Menu Toggle */}
         <button
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsOpen(!isOpen);
+          }}
           className="relative z-70 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-all hover:border-gold/50 hover:text-gold md:hidden"
           aria-label={isOpen ? "Close menu" : "Open menu"}
         >
@@ -108,7 +120,7 @@ export function Header() {
         </div>
       </div>
 
-      {/* Mobile Full-Screen Overlay Menu */}
+      {/* Expanded Mobile Content */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -116,59 +128,60 @@ export function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setIsOpen(false)}
-            className="fixed inset-0 z-60 flex flex-col md:hidden cursor-pointer"
+            className="flex h-[calc(100vh-80px)] flex-col p-8 text-center cursor-pointer"
           >
-            {/* Dark Blur Backdrop */}
-            <div className="absolute inset-0 bg-black/70 backdrop-blur-2xl" />
-            
-            <div className="relative flex h-full flex-col p-8 pt-24 text-center">
-              {/* Centered Navigation Links */}
-              <nav className="flex flex-1 flex-col items-center justify-center gap-14">
-                {[
+            {/* Centered Navigation Links */}
+            <nav
+              onClick={(e) => e.stopPropagation()}
+              className="flex flex-1 flex-col items-center justify-center gap-10 cursor-default"
+            >
+              {(
+                [
                   { to: "/", label: "Home" },
                   { to: "/menu", label: "Menu" },
                   { to: "/about", label: "Our Story" },
-                  { to: "/about", label: "Contact" }
-                ].map((link, i) => (
-                  <motion.div
-                    key={`${link.to}-${i}`}
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 + i * 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    <Link
-                      to={link.to as any}
-                      onClick={() => setIsOpen(false)}
-                      className="font-display text-6xl font-light tracking-tighter text-white/95 transition-all hover:text-gold active:scale-95 block"
-                    >
-                      {link.label}
-                    </Link>
-                  </motion.div>
-                ))}
-              </nav>
-
-              {/* Footer info - Minimalist */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.7 }}
-                className="mt-auto border-t border-white/5 pt-12"
-              >
-                <Link
-                  to="/menu"
-                  onClick={() => setIsOpen(false)}
-                  className="mx-auto flex max-w-xs items-center justify-center rounded-full bg-gold py-6 text-[10px] font-bold uppercase tracking-[0.5em] text-black shadow-[0_20px_50px_rgba(212,175,55,0.2)] transition-all hover:bg-white hover:scale-105"
+                  { to: "/about", label: "Contact" },
+                ] as const
+              ).map((link, i) => (
+                <motion.div
+                  key={`${link.to}-${i}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 + i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  Book a Table
-                </Link>
-                <div className="mt-12 opacity-20">
-                  <p className="text-[10px] uppercase tracking-[0.4em] text-white">Kigali • Rwanda</p>
-                </div>
-              </motion.div>
-            </div>
+                  <Link
+                    to={link.to}
+                    onClick={() => setIsOpen(false)}
+                    className="font-sans text-xs font-bold uppercase tracking-[0.6em] text-white/90 transition-all hover:text-gold active:scale-95 block"
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
+              ))}
+            </nav>
+
+            {/* Footer info */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.7 }}
+              onClick={(e) => e.stopPropagation()}
+              className="mt-auto border-t border-white/10 pb-12 pt-12 cursor-default"
+            >
+              <Link
+                to="/menu"
+                onClick={() => setIsOpen(false)}
+                className="mx-auto flex max-w-50 items-center justify-center rounded-full bg-gold py-4 text-[9px] font-bold uppercase tracking-[0.4em] text-black transition-all hover:bg-white hover:scale-105"
+              >
+                Book a Table
+              </Link>
+              <div className="mt-8 opacity-40">
+                <p className="text-[9px] uppercase tracking-[0.4em] text-white">Kigali • Rwanda</p>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   );
 }

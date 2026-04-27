@@ -32,24 +32,29 @@ export const Route = createRootRoute({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=5" },
       { title: "Aslan Cafe Luxe & Resto — Luxury Dining & Exquisite Flavors" },
       {
         name: "description",
         content:
-          "Aslan Cafe Luxe & Resto offers a premium dining experience. Luxury atmosphere, gourmet flavors, and exceptional service in the heart of the city.",
+          "Aslan Cafe Luxe & Resto offers a premium dining experience in Kigali. Luxury atmosphere, gourmet flavors, and exceptional service.",
       },
-      { name: "author", content: "Aslan Cafe Luxe & Resto" },
+      { name: "author", content: "Aslan Cafe" },
       { property: "og:title", content: "Aslan Cafe Luxe & Resto — Luxury Dining" },
       {
         property: "og:description",
-        content: "Luxury dining, gourmet flavors, and exceptional service.",
+        content: "Experience the pinnacle of luxury dining and gourmet flavors in Kigali.",
       },
+      { property: "og:image", content: "/hero-cinematic.png" },
       { property: "og:type", content: "restaurant" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "theme-color", content: "#0c0705" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "manifest", href: "/site.webmanifest" },
+      { rel: "icon", href: "/aslanlogo.png" },
+      { rel: "apple-touch-icon", href: "/aslanlogo.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {

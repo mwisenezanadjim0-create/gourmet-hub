@@ -16,6 +16,9 @@ import olivegrove from "@/assets/about-olivegrove.jpg";
 import table from "@/assets/about-table.jpg";
 import market from "@/assets/about-market.jpg";
 import heroDish from "@/assets/hero-dish.jpg";
+import aslanImage1 from "@/assets/aslanImage1.png";
+import aslanImage2 from "@/assets/aslanImage2.png";
+import aslanImage3 from "@/assets/aslanImage3.png";
 import { useEffect } from "react";
 
 export const Route = createFileRoute("/about")({
@@ -64,9 +67,9 @@ function AboutPage() {
   }, []);
 
   const introSlides = [
-    { src: interior, title: "Welcome to Aslan Cafe", subtitle: "Where luxury meets taste" },
-    { src: heroDish, title: "Gourmet Flavors", subtitle: "Crafted with passion" },
-    { src: table, title: "An Unforgettable Experience", subtitle: "Dining reimagined" },
+    { src: aslanImage1, title: "Welcome to Aslan Cafe", subtitle: "Where luxury meets taste" },
+    { src: aslanImage2, title: "Gourmet Flavors", subtitle: "Crafted with passion" },
+    { src: aslanImage3, title: "An Unforgettable Experience", subtitle: "Dining reimagined" },
   ];
 
   return (
@@ -76,28 +79,59 @@ function AboutPage() {
         <Carousel
           className="w-full"
           opts={{ loop: true }}
-          plugins={[Autoplay({ delay: 4000 }), Fade()]}
+          plugins={[Autoplay({ delay: 9000 }), Fade()]}
         >
-          <CarouselContent>
-            {introSlides.map((slide, index) => (
-              <CarouselItem key={index} className="relative h-[60vh] min-h-100 w-full">
-                <img
-                  src={slide.src}
-                  alt={slide.title}
-                  className="absolute inset-0 h-full w-full object-cover brightness-75"
-                />
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-background/20 p-6 text-center">
-                  <span className="font-script text-3xl md:text-5xl text-gold drop-shadow-md">
-                    {slide.subtitle}
-                  </span>
-                  <h1 className="mt-3 font-display text-4xl md:text-7xl text-white drop-shadow-lg">
-                    {slide.title}
-                  </h1>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <div className="absolute bottom-10 right-20 z-10 flex gap-4">
+          <style>
+            {`
+              [data-embla-slide] {
+                transition: opacity 3000ms ease-in-out !important;
+              }
+            `}
+          </style>
+          <div className="relative">
+            <CarouselContent>
+              {introSlides.map((slide, index) => (
+                <CarouselItem key={index} className="group relative h-[85vh] min-h-120 w-full overflow-hidden">
+                  <img
+                    src={slide.src}
+                    alt={slide.title}
+                    className={`absolute inset-0 h-full w-full object-cover brightness-[0.85] animate-montage ${
+                      index === 2 ? "object-bottom" : "object-center"
+                    }`}
+                  />
+                  <div className="relative z-20 flex h-full flex-col items-center justify-center p-6 text-center">
+                    <div className="max-w-4xl">
+                      <span className="font-script text-4xl md:text-6xl text-gold drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] animate-in fade-in slide-in-from-bottom-4 duration-1500">
+                        {slide.subtitle}
+                      </span>
+                      <h1 className="mt-6 font-display text-5xl md:text-8xl text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.9)] animate-in fade-in slide-in-from-bottom-8 duration-1500 delay-300">
+                        {slide.title}
+                      </h1>
+                      <div className="mx-auto mt-10 h-px w-32 bg-linear-to-r from-transparent via-gold to-transparent opacity-60" />
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+
+            {/* Persistent Cinematic Filter Overlay — stays during transitions */}
+            <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden">
+              {/* Glass Base */}
+              <div className="absolute inset-0 bg-black/35 backdrop-blur-[2px]" />
+              
+              {/* Color Tint Glass */}
+              <div className="absolute inset-0 bg-linear-to-tr from-terracotta/30 via-transparent to-gold/20 mix-blend-overlay opacity-60" />
+              
+              {/* Cinematic Vignette */}
+              <div className="absolute inset-0 bg-[radial-gradient(circle,transparent_30%,rgba(0,0,0,0.75)_100%)] opacity-70" />
+              
+              {/* Film Grain / Noise Texture */}
+              <div className="absolute inset-0 opacity-[0.03] mix-blend-soft-light" 
+                   style={{ backgroundImage: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")` }} />
+            </div>
+          </div>
+
+          <div className="absolute bottom-10 right-20 z-30 flex gap-4">
             <CarouselPrevious className="static h-12 w-12 border-white/20 bg-background/50 text-white backdrop-blur hover:bg-background hover:text-foreground" />
             <CarouselNext className="static h-12 w-12 border-white/20 bg-background/50 text-white backdrop-blur hover:bg-background hover:text-foreground" />
           </div>

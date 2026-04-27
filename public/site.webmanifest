@@ -1,0 +1,21 @@
+{
+  "name": "Aslan Cafe Luxe & Resto",
+  "short_name": "Aslan Cafe",
+  "description": "Luxury Dining & Exquisite Flavors in Kigali",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0c0705",
+  "theme_color": "#d4af37",
+  "icons": [
+    {
+      "src": "/aslanlogo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/aslanlogo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

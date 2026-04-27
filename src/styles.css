@@ -311,6 +311,16 @@ nav a,
   }
 }
 
+@keyframes montage-ken-burns {
+  0% { transform: scale(1) translate(0, 0); }
+  50% { transform: scale(1.1) translate(-1%, -1%); }
+  100% { transform: scale(1) translate(0, 0); }
+}
+
+.animate-montage {
+  animation: montage-ken-burns 25s ease-in-out infinite;
+}
+
 .banner-3d .slider-3d .item-3d {
   position: absolute;
   inset: 0 0 0 0;
